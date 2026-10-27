@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const { renderMediaOnCloudrun } = require('@remotion/cloudrun/client');
 
-// Track rendering progress
+// Track rendering progress state
 let currentProgress = 0;
 let isRenderComplete = false;
 
@@ -62,7 +62,7 @@ function parseInputProps() {
 }
 
 /**
- * Downloads a file from a URL to local destination.
+ * Downloads a file from a URL to local destination with proper stream cleanup on redirects/errors.
  */
 function downloadFile(url, destinationPath) {
   return new Promise((resolve, reject) => {
@@ -72,14 +72,20 @@ function downloadFile(url, destinationPath) {
     client
       .get(url, (response) => {
         if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
-          // Follow redirect
-          return downloadFile(response.headers.location, destinationPath)
-            .then(resolve)
-            .catch(reject);
+          file.close(() => {
+            downloadFile(response.headers.location, destinationPath)
+              .then(resolve)
+              .catch(reject);
+          });
+          return;
         }
 
         if (response.statusCode !== 200) {
-          return reject(new Error(`Failed to download file. HTTP Status Code: ${response.statusCode}`));
+          file.close(() => {
+            fs.unlink(destinationPath, () => {});
+            reject(new Error(`Failed to download file. HTTP Status Code: ${response.statusCode}`));
+          });
+          return;
         }
 
         response.pipe(file);
@@ -89,8 +95,10 @@ function downloadFile(url, destinationPath) {
         });
       })
       .on('error', (err) => {
-        fs.unlink(destinationPath, () => {});
-        reject(err);
+        file.close(() => {
+          fs.unlink(destinationPath, () => {});
+          reject(err);
+        });
       });
   });
 }
@@ -189,6 +197,9 @@ Options:
         }
         currentProgress = progress;
       },
+      onProgress: (progress) => {
+        currentProgress = progress;
+      },
     });
 
     isRenderComplete = true;
@@ -220,4 +231,8 @@ Options:
   }
 }
 
-main();
+module.exports = { getRenderProgress, main };
+
+if (require.main === module) {
+  main();
+}
