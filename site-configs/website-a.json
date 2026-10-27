@@ -1,0 +1,27 @@
+{
+  "brand": {
+    "name": "Automated Video Engine",
+    "logoUrl": "https://remotion.dev/img/logo-small.png",
+    "primaryColor": "#0052FF",
+    "backgroundColor": "#0F172A",
+    "textColor": "#FFFFFF"
+  },
+  "hero": {
+    "title": "Turn Any Website into Video",
+    "subtitle": "Programmatic video generation powered by Remotion & Google Cloud Run"
+  },
+  "features": [
+    {
+      "title": "Dynamic Parameterization",
+      "description": "Pass custom JSON payloads to generate unique videos on demand."
+    },
+    {
+      "title": "Cloud Scale Rendering",
+      "description": "Render videos fast with Google Cloud Run serverless infrastructure."
+    }
+  ],
+  "callToAction": {
+    "text": "Get Started at yourwebsite.com",
+    "buttonColor": "#22C55E"
+  }
+}
