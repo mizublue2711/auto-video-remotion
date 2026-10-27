@@ -1,10 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
-const http = require('http');
-require('dotenv').config();
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
+import http from 'http';
+import dotenv from 'dotenv';
+import { renderMediaOnCloudrun } from '@remotion/cloudrun/client';
 
-const { renderMediaOnCloudrun } = require('@remotion/cloudrun/client');
+dotenv.config();
 
 // Track rendering progress
 let currentProgress = 0;
