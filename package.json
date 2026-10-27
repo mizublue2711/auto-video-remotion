@@ -5,7 +5,8 @@
   "type": "module",
   "main": "render-cloud.js",
   "scripts": {
-    "render": "node render-cloud.js"
+    "render": "node render-cloud.js",
+    "validate:configs": "tsx scripts/validate-configs.ts"
   },
   "dependencies": {
     "@remotion/cloudrun": "^4.0.0",
@@ -13,6 +14,10 @@
     "dotenv": "^16.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remotion": "^4.0.0"
+    "remotion": "^4.0.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15"
   }
 }
