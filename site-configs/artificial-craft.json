@@ -1,0 +1,27 @@
+{
+  "brand": {
+    "name": "Artificial Craft",
+    "logoUrl": "https://remotion.dev/img/logo-small.png",
+    "primaryColor": "#6366F1",
+    "backgroundColor": "#0F172A",
+    "textColor": "#FFFFFF"
+  },
+  "hero": {
+    "title": "Crafting AI-Powered Digital Experiences",
+    "subtitle": "High-performance headless Remotion video rendering on Google Cloud Run"
+  },
+  "features": [
+    {
+      "title": "Containerized Workflows",
+      "description": "Deterministic Docker builds for headless Chrome stability."
+    },
+    {
+      "title": "Zero-Idle Cost",
+      "description": "Serverless execution scaling automatically based on rendering workloads."
+    }
+  ],
+  "callToAction": {
+    "text": "Visit Artificial Craft",
+    "buttonColor": "#6366F1"
+  }
+}
