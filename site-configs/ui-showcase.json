@@ -1,0 +1,45 @@
+{
+  "brand": {
+    "name": "DesignCraft",
+    "logoUrl": "",
+    "primaryColor": "#ec4899",
+    "accentColor": "#8b5cf6",
+    "backgroundColor": "#090d16",
+    "textColor": "#f8fafc"
+  },
+  "hero": {
+    "badge": "UI SHOWCASE",
+    "title": "Interactive Design Tokens",
+    "subtitle": "Modular component architecture with 3D spatial assembly."
+  },
+  "showcaseCard": {
+    "previewImageUrl": "https://picsum.photos/800/450",
+    "caption": "Live Component Preview & Theme Inspector"
+  },
+  "features": [
+    {
+      "title": "3D Lego Assembly",
+      "description": "Snap components dynamically in 3D spatial canvas.",
+      "icon": "🧩"
+    },
+    {
+      "title": "Glassmorphism UI",
+      "description": "Elevated blur surfaces with customizable glowing borders.",
+      "icon": "✨"
+    },
+    {
+      "title": "Theme Synchronized",
+      "description": "Seamless color variable propagation across templates.",
+      "icon": "🎨"
+    },
+    {
+      "title": "High FPS Export",
+      "description": "Fluid 60 FPS video rendering ready for Cloud Run.",
+      "icon": "⚡"
+    }
+  ],
+  "callToAction": {
+    "label": "Explore Component Library",
+    "url": "https://example.com/ui-showcase"
+  }
+}

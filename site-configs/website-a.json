@@ -1,0 +1,25 @@
+{
+  "brand": {
+    "name": "SaaSFlow",
+    "logoUrl": "",
+    "primaryColor": "#3b82f6",
+    "accentColor": "#6366f1",
+    "backgroundColor": "#0f172a",
+    "textColor": "#f8fafc"
+  },
+  "hero": {
+    "badge": "NEW RELEASE v2.0",
+    "title": "Next-Gen Analytics Platform",
+    "subtitle": "Streamline data workflows with real-time AI insights and automated reporting."
+  },
+  "features": [
+    {
+      "title": "Real-Time Tracking",
+      "description": "Instant metrics delivery with microsecond latency."
+    },
+    {
+      "title": "AI Insights",
+      "description": "Automated trend anomaly detection."
+    }
+  ]
+}

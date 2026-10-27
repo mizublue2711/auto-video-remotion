@@ -1,0 +1,20 @@
+{
+  "brand": {
+    "name": "DevPulse",
+    "logoUrl": "",
+    "primaryColor": "#10b981",
+    "accentColor": "#06b6d4",
+    "backgroundColor": "#020617",
+    "textColor": "#f8fafc"
+  },
+  "feature": {
+    "title": "Instant Edge Function Deployment",
+    "description": "Deploy serverless functions globally in under 50ms with automatic zero-downtime rollouts.",
+    "icon": "🚀",
+    "codeSnippetOrImage": "export default async function handler(req) {\n  const data = await req.json();\n  return Response.json({ status: 'deployed', timestamp: Date.now() });\n}"
+  },
+  "callToAction": {
+    "label": "Read Release Notes",
+    "url": "https://example.com/changelog/edge-functions"
+  }
+}
