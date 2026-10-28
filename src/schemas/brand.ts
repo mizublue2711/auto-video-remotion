@@ -10,7 +10,7 @@ export const brandSchema = z.object({
   secondaryColor: hexColorSchema.optional(),
   backgroundColor: hexColorSchema,
   textColor: hexColorSchema.optional(),
-  fontFamily: z.string().optional().default('system-ui, sans-serif'),
+  fontFamily: z.string().default('system-ui, sans-serif'),
   logoUrl: z
     .string()
     .refine(

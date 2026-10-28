@@ -7,7 +7,7 @@ export const metricItemSchema = z.object({
 });
 
 export const logarithmicShellSchema = z.object({
-  brand: brandSchema.optional().default({
+  brand: brandSchema.default({
     name: 'ARTIFICIAL CRAFT',
     primaryColor: '#00E5FF',
     backgroundColor: '#050505',
