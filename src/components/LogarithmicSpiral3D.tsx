@@ -107,7 +107,7 @@ export const LogarithmicSpiral3D: React.FC<LogarithmicSpiral3DProps> = ({
   } else {
     // Phase 4: Magnetic collapse back into Swiss Brutalism logo box, then collapse to dot at end
     const collapseSpring = spring({
-      frame: Math.max(0, frame - 2160),
+      frame,
       fps,
       config: { damping: 14, mass: 0.8 },
     });
