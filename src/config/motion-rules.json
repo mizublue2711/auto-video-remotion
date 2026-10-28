@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "compositionId": "MasterDirectorScene",
+    "fps": 60,
+    "durationInFrames": 180,
+    "dimensions": {
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "storyboardTimeline": {
+    "intro": {
+      "startFrame": 0,
+      "endFrame": 45
+    },
+    "environment": {
+      "startFrame": 40,
+      "endFrame": 70
+    },
+    "activation": {
+      "startFrame": 60,
+      "endFrame": 90
+    },
+    "contentReveal": {
+      "startFrame": 80,
+      "endFrame": 180
+    }
+  },
+  "cameraAndDepthTokens": {
+    "kineticParallax": {
+      "enabled": true,
+      "speedFactors": {
+        "bg": 0.2,
+        "fg": 1.0
+      }
+    },
+    "chromaticAberration": {
+      "enabled": true,
+      "offset": [2, -2]
+    },
+    "depthOfFieldBlur": {
+      "enabled": true,
+      "maxBlurPx": 8
+    }
+  },
+  "kineticTypographyTokens": {
+    "style": "scramble-text",
+    "scrambleChars": "!@#$%^&*()_+-=0123456789CRAFT"
+  }
+}
