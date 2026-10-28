@@ -1,6 +1,14 @@
-node_modules/
-dist/
-downloads/
+
+# Sensitive GCP Keys & Env
+gcp-key.json
+REMOTION_GCP_PRIVATE_KEY
 .env
+sa-permissions.json
+*.env
+
+# Render Outputs & OS Trash
+out/
+out.mp4
 .DS_Store
-*.mp4
+node_modules/
+downloads/

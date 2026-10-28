@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Remotion Cloud Run video rendering automation",
   "type": "module",
-  "main": "render-cloud.js",
+  "main": "scripts/render-cloud.js",
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion bundle src/index.ts --out-dir=dist/bundle",
-    "render": "node render-cloud.js",
+    "render": "node scripts/render-cloud.js",
+    "render:site": "node scripts/render-site.js",
     "validate:configs": "tsx scripts/validate-configs.ts"
   },
   "dependencies": {

@@ -1,14 +1,16 @@
 import React from 'react';
 import { Composition } from 'remotion';
-import { MasterDirectorScene } from './components/MasterDirectorScene';
-import { MasterSceneInputProps } from './types/motion-schema';
+
+// Import Master Scene đúng vị trí thư mục src/scenes/
+import { MasterDirectorScene } from './scenes/MasterDirectorScene';
 import { WebsiteShowcase, WebsiteShowcaseProps } from './compositions/WebsiteShowcase';
 import websiteAConfig from '../site-configs/website-a.json';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
-      <Composition<any, any>
+      {/* Master Director Scene - Đã dời về src/scenes/ */}
+      <Composition
         id="MasterDirectorScene"
         component={MasterDirectorScene}
         durationInFrames={180}
@@ -23,9 +25,11 @@ export const RemotionRoot: React.FC = () => {
             { label: 'FPS', value: '60' },
             { label: 'PRECISION SLA', value: '99.99%' },
           ],
-        } satisfies MasterSceneInputProps}
+        }}
       />
-      <Composition<any, any>
+
+      {/* Website Showcase Composition */}
+      <Composition
         id="WebsiteShowcase"
         component={WebsiteShowcase}
         durationInFrames={150}
@@ -37,5 +41,3 @@ export const RemotionRoot: React.FC = () => {
     </>
   );
 };
-
-export const Root = RemotionRoot;

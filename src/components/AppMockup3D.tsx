@@ -1,46 +1,66 @@
-import React, { useState } from 'react';
-import { Img } from 'remotion';
+import React from 'react';
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 
 export interface AppMockup3DProps {
-  mockupUrl: string;
-  scale?: number;
-  blurPx?: number;
-  rotateX?: number;
-  rotateY?: number;
-  borderColor?: string;
-  boxShadow?: string;
+  title?: string;
+  primaryColor?: string;
 }
 
-const DEFAULT_FALLBACK_IMAGE =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450"><rect width="800" height="450" fill="%230F172A" stroke="%2300E5FF" stroke-width="2"/><text x="400" y="225" font-family="monospace" font-size="24" fill="%2300E5FF" text-anchor="middle">ARTIFICIAL CRAFT // 60FPS</text></svg>';
-
 export const AppMockup3D: React.FC<AppMockup3DProps> = ({
-  mockupUrl,
-  scale = 1,
-  blurPx = 0,
-  rotateX = 10,
-  rotateY = -12,
-  borderColor = '#00E5FF',
-  boxShadow = '0 20px 50px rgba(0, 229, 255, 0.15)',
+  title = 'Interactive Dashboard',
+  primaryColor = '#0052FF',
 }) => {
-  const [imageSrc, setImageSrc] = useState<string>(mockupUrl || DEFAULT_FALLBACK_IMAGE);
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const entrance = spring({
+    frame,
+    fps,
+    config: { damping: 14 },
+  });
+
+  const rotateX = interpolate(entrance, [0, 1], [25, 5]);
+  const rotateY = interpolate(entrance, [0, 1], [-15, -2]);
+  const scale = interpolate(entrance, [0, 1], [0.8, 1]);
 
   return (
-    <div style={{ perspective: '1200px', display: 'flex', justifyContent: 'center' }}>
+    <div
+      style={{
+        perspective: '1000px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <div
         style={{
-          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
-          filter: `blur(${blurPx}px)`,
-          boxShadow,
-          border: `1px solid ${borderColor}`,
-          transition: 'transform 0.1s ease',
+          transform: `scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+          width: '700px',
+          height: '420px',
+          backgroundColor: '#1E293B',
+          borderRadius: '16px',
+          border: `2px solid ${primaryColor}`,
+          boxShadow: `0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px ${primaryColor}44`,
+          padding: '24px',
+          color: '#FFFFFF',
+          display: 'flex',
+          flexDirection: 'column',
+          boxSizing: 'border-box',
         }}
       >
-        <Img
-          src={imageSrc}
-          onError={() => setImageSrc(DEFAULT_FALLBACK_IMAGE)}
-          style={{ width: '800px', display: 'block' }}
-        />
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '20px' }}>
+          <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#EF4444' }} />
+          <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#F59E0B' }} />
+          <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#10B981' }} />
+        </div>
+        <h2 style={{ margin: '0 0 16px 0', fontSize: '28px', color: primaryColor }}>{title}</h2>
+        <div style={{ flex: 1, backgroundColor: '#0F172A', borderRadius: '8px', padding: '16px' }}>
+          <div style={{ height: '20px', width: '60%', backgroundColor: '#334155', borderRadius: '4px', marginBottom: '12px' }} />
+          <div style={{ height: '14px', width: '80%', backgroundColor: '#1E293B', borderRadius: '4px', marginBottom: '8px' }} />
+          <div style={{ height: '14px', width: '45%', backgroundColor: '#1E293B', borderRadius: '4px' }} />
+        </div>
       </div>
     </div>
   );
