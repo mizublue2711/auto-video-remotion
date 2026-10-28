@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Remotion Cloud Run video rendering automation",
   "type": "module",
-  "main": "render-cloud.js",
+  "main": "scripts/render-cloud.js",
   "scripts": {
-    "render": "node render-cloud.js"
+    "render": "node scripts/render-cloud.js",
+    "render:site": "node scripts/render-site.js"
   },
   "dependencies": {
     "@remotion/cloudrun": "^4.0.0",
