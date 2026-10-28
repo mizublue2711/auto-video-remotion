@@ -14,6 +14,7 @@ export * from './brand.js';
 export * from './videoSpecs.js';
 export * from './websiteShowcase.js';
 export * from './datasetShowcase.js';
+export * from './logarithmicShellSchema';
 
 export const RemotionConfigSchema = z.object({
   brand: brandSchema,

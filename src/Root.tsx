@@ -6,6 +6,10 @@ import { MasterDirectorScene } from './scenes/MasterDirectorScene';
 import { WebsiteShowcase, WebsiteShowcaseProps } from './compositions/WebsiteShowcase';
 import websiteAConfig from '../site-configs/website-a.json';
 
+import { LogarithmicShellScene } from './scenes/LogarithmicShellScene';
+import { LogarithmicShellSchema } from './schemas/logarithmicShellSchema';
+import logarithmicShellConfig from '../site-configs/logarithmic-shell-v1.json';
+
 export const RemotionRoot: React.FC = () => {
   return (
     <>
@@ -37,6 +41,18 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={websiteAConfig as WebsiteShowcaseProps}
+      />
+
+      {/* Logarithmic Shell Composition */}
+      <Composition
+        id="LogarithmicShell-V1"
+        component={LogarithmicShellScene}
+        schema={LogarithmicShellSchema}
+        durationInFrames={2700}
+        fps={60}
+        width={1920}
+        height={1080}
+        defaultProps={logarithmicShellConfig}
       />
     </>
   );

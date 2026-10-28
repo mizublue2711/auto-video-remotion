@@ -1,0 +1,25 @@
+{
+  "brand": {
+    "name": "ARTIFICIAL CRAFT",
+    "logoUrl": "https://artificialcraft.space/og.png",
+    "primaryColor": "#00E5FF",
+    "backgroundColor": "#050505",
+    "textColor": "#FFFFFF"
+  },
+  "backgroundColor": "#050505",
+  "primaryAccent": "#00E5FF",
+  "gridColor": "#222222",
+  "phase1Text": "Complexity is a fool’s spell.",
+  "phase2Text": "Simplify to build a shell.",
+  "phase3Text": "Data behind, pure art ahead.",
+  "headerText": "ARTIFICIAL CRAFT",
+  "sloganText": "COMPLEX DATA. PURE VISUAL ART.",
+  "urlText": "https://artificialcraft.space/",
+  "metrics": [
+    { "label": "FPS", "value": "60" },
+    { "label": "LATENCY", "value": "0.4MS" },
+    { "label": "SUBMESH_TRI", "value": "4096" },
+    { "label": "SHELL_PHI", "value": "1.618" },
+    { "label": "PRECISION", "value": "99.99%" }
+  ]
+}
