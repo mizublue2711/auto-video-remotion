@@ -15,6 +15,8 @@ export const infiniteLoopSchema = z.object({
   accentCyan: hexColorSchema.default('#00E5FF'),
   audioUrl: z.string().default('audio/signal-at-zero.mp3'),
   bpm: z.number().default(130),
+  initialCameraScale: z.number().default(0.75),
+  targetCameraScale: z.number().default(1.60),
   animationType: z
     .enum([
       'TYPEWRITER_CHAR',
