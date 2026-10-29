@@ -9,6 +9,11 @@ import websiteAConfig from '../site-configs/website-a.json';
 import { LogarithmicShellScene } from './scenes/LogarithmicShellScene';
 import { LogarithmicShellSchema } from './schemas/logarithmicShellSchema';
 import logarithmicShellConfig from '../site-configs/logarithmic-shell-v1.json';
+
+import { InfiniteContinuousLoopScene } from './scenes/InfiniteContinuousLoopScene';
+import { InfiniteLoopSchema } from './schemas/infiniteLoopSchema';
+import infiniteLoopConfig from '../site-configs/infinite-loop-v1.json';
+
 import { websiteShowcaseSchema } from './schemas/websiteShowcase';
 import { RemotionConfigSchema } from './schemas/index';
 
@@ -57,6 +62,18 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={LogarithmicShellSchema.parse(logarithmicShellConfig)}
+      />
+
+      {/* Infinite Continuous Loop Composition - Upgraded to 2,340 frames (39.0s @ 60FPS) */}
+      <Composition
+        id="InfiniteContinuousLoop-V1"
+        component={InfiniteContinuousLoopScene}
+        schema={InfiniteLoopSchema}
+        durationInFrames={2340}
+        fps={60}
+        width={1920}
+        height={1080}
+        defaultProps={InfiniteLoopSchema.parse(infiniteLoopConfig)}
       />
     </>
   );

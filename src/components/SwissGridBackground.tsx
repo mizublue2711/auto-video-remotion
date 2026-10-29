@@ -5,27 +5,30 @@ export interface SwissGridBackgroundProps {
   backgroundColor?: string;
   gridColor?: string;
   accentColor?: string;
+  gridSize?: number;
   showScanLine?: boolean;
   showTelemetryCorners?: boolean;
-  gridSize?: number;
 }
 
 export const SwissGridBackground: React.FC<SwissGridBackgroundProps> = ({
   backgroundColor = '#050505',
   gridColor = '#222222',
   accentColor = '#00E5FF',
-  showScanLine = true,
-  showTelemetryCorners = true,
   gridSize = 60,
+  showScanLine = true,
+  showTelemetryCorners = false,
 }) => {
   const frame = useCurrentFrame();
 
-  // Continuous laser scan line moving vertically down the canvas
-  const scanLinePos = (frame * 6) % 1080;
-  const scanOpacity = interpolate(
-    Math.sin(frame * 0.1),
+  // CAD radar scanning effect based on frame % 180
+  const scanCycle = (frame % 180) / 180; // 0 -> 1
+  const scanLineY = interpolate(scanCycle, [0, 1], [0, 1080]);
+  const scanLineX = interpolate(scanCycle, [0, 1], [0, 1920]);
+
+  const laserOpacity = interpolate(
+    Math.sin((frame / 180) * Math.PI * 2),
     [-1, 1],
-    [0.35, 0.75]
+    [0.6, 0.95]
   );
 
   return (
@@ -38,28 +41,58 @@ export const SwissGridBackground: React.FC<SwissGridBackgroundProps> = ({
         fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
       }}
     >
-      {/* Laser Scan Line */}
       {showScanLine && (
-        <div
-          style={{
-            position: 'absolute',
-            top: `${scanLinePos}px`,
-            left: 0,
-            right: 0,
-            height: '2px',
-            backgroundColor: accentColor,
-            boxShadow: `0 0 15px ${accentColor}, 0 0 30px ${accentColor}`,
-            opacity: scanOpacity,
-            zIndex: 1,
-            pointerEvents: 'none',
-          }}
-        />
+        <>
+          {/* Horizontal glowing laser scan line */}
+          <div
+            style={{
+              position: 'absolute',
+              top: `${scanLineY}px`,
+              left: 0,
+              right: 0,
+              height: '2px',
+              background: `linear-gradient(90deg, transparent 0%, ${accentColor} 30%, ${accentColor} 70%, transparent 100%)`,
+              boxShadow: `0 0 15px ${accentColor}, 0 0 30px ${accentColor}`,
+              opacity: laserOpacity,
+              zIndex: 1,
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* Vertical glowing laser scan line */}
+          <div
+            style={{
+              position: 'absolute',
+              left: `${scanLineX}px`,
+              top: 0,
+              bottom: 0,
+              width: '2px',
+              background: `linear-gradient(180deg, transparent 0%, ${accentColor} 30%, ${accentColor} 70%, transparent 100%)`,
+              boxShadow: `0 0 15px ${accentColor}, 0 0 30px ${accentColor}`,
+              opacity: laserOpacity * 0.7,
+              zIndex: 1,
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* Radar sweep glow sector overlay */}
+          <div
+            style={{
+              position: 'absolute',
+              top: `${scanLineY - 120}px`,
+              left: 0,
+              right: 0,
+              height: '120px',
+              background: `linear-gradient(180deg, transparent 0%, ${accentColor}12 100%)`,
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+          />
+        </>
       )}
 
-      {/* Swiss Telemetry Corner Markings */}
       {showTelemetryCorners && (
         <>
-          {/* Top-Left */}
           <div
             style={{
               position: 'absolute',
@@ -75,8 +108,6 @@ export const SwissGridBackground: React.FC<SwissGridBackgroundProps> = ({
           >
             + SYS_REF // [1920x1080] :: 60 FPS
           </div>
-
-          {/* Top-Right */}
           <div
             style={{
               position: 'absolute',
@@ -92,38 +123,6 @@ export const SwissGridBackground: React.FC<SwissGridBackgroundProps> = ({
             }}
           >
             FRM: {String(frame).padStart(4, '0')} // LOGARITHMIC_SHELL
-          </div>
-
-          {/* Bottom-Left */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '24px',
-              left: '24px',
-              color: '#666666',
-              fontSize: '10px',
-              letterSpacing: '1px',
-              zIndex: 2,
-              userSelect: 'none',
-            }}
-          >
-            LAT: 0.4MS | SUBMESH: ACTIVE | PHI: 1.618033
-          </div>
-
-          {/* Bottom-Right */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '24px',
-              right: '24px',
-              color: '#666666',
-              fontSize: '10px',
-              letterSpacing: '1px',
-              zIndex: 2,
-              userSelect: 'none',
-            }}
-          >
-            SWISS BRUTALISM // NO_BORDER_RADIUS
           </div>
         </>
       )}
