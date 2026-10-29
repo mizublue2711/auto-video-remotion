@@ -15,6 +15,14 @@ export const infiniteLoopSchema = z.object({
   accentCyan: hexColorSchema.default('#00E5FF'),
   audioUrl: z.string().default('audio/signal-at-zero.mp3'),
   bpm: z.number().default(130),
+  animationType: z
+    .enum([
+      'TYPEWRITER_CHAR',
+      'TRACK_MATTE_SLIDE',
+      'BLUR_TO_SHARP',
+      'STROKE_TRIM_PATH',
+    ])
+    .default('TYPEWRITER_CHAR'),
   title: z.string().default('ARTIFICIAL CRAFT'),
   slogan: z.string().default('COMPLEX DATA. PURE VISUAL ART.'),
   bentoNode1: z.string().default('AUTOMATION'),

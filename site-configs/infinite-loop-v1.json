@@ -12,6 +12,7 @@
   "accentCyan": "#00E5FF",
   "audioUrl": "audio/signal-at-zero.mp3",
   "bpm": 130,
+  "animationType": "TYPEWRITER_CHAR",
   "title": "ARTIFICIAL CRAFT",
   "slogan": "COMPLEX DATA. PURE VISUAL ART.",
   "bentoNode1": "AUTOMATION",

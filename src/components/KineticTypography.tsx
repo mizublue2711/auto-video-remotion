@@ -1,11 +1,18 @@
 import React from 'react';
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 
+export type KineticAnimationType =
+  | 'TYPEWRITER_CHAR'
+  | 'TRACK_MATTE_SLIDE'
+  | 'BLUR_TO_SHARP'
+  | 'STROKE_TRIM_PATH';
+
 export interface KineticTypographyProps {
   text?: string;
   color?: string;
   accentColor?: string;
   mode?: 'scramble' | 'typewriter' | 'spring' | 'clip';
+  animationType?: KineticAnimationType;
   fontSize?: string | number;
   letterSpacing?: string;
   className?: string;
@@ -17,59 +24,84 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
   text = 'DYNAMIC MOTION ENGINE',
   color = '#FFFFFF',
   accentColor = '#00E5FF',
-  mode = 'scramble',
+  mode,
+  animationType = 'TYPEWRITER_CHAR',
   fontSize = '48px',
   letterSpacing = '2px',
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
+  // If explicit mode legacy prop is specified, map to animationType if not set
+  const activeEngine: KineticAnimationType =
+    animationType ||
+    (mode === 'typewriter'
+      ? 'TYPEWRITER_CHAR'
+      : mode === 'clip'
+      ? 'TRACK_MATTE_SLIDE'
+      : mode === 'spring'
+      ? 'BLUR_TO_SHARP'
+      : 'TYPEWRITER_CHAR');
+
   const chars = text.split('');
   const totalChars = chars.length;
 
-  if (mode === 'spring') {
-    const words = text.split(' ');
+  // ENGINE 1: TYPEWRITER_CHAR - Character-by-character reveal with matrix holding
+  if (activeEngine === 'TYPEWRITER_CHAR') {
     return (
       <div
         style={{
-          display: 'flex',
-          gap: '16px',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: 'inline-flex',
           flexWrap: 'wrap',
+          justifyContent: 'center',
           fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+          fontSize: typeof fontSize === 'number' ? `${fontSize}px` : fontSize,
+          fontWeight: '700',
+          letterSpacing,
+          textTransform: 'uppercase',
         }}
       >
-        {words.map((word, i) => {
-          const delay = i * 5;
-          const wordFrame = Math.max(0, frame - delay);
-          const wordSpring = spring({
-            frame: wordFrame,
-            fps,
-            config: { damping: 12 },
-          });
+        {chars.map((char, index) => {
+          if (char === ' ') {
+            return <span key={index} style={{ width: '0.4em' }} />;
+          }
 
-          const opacity = interpolate(wordFrame, [0, 10], [0, 1], {
-            extrapolateLeft: 'clamp',
-            extrapolateRight: 'clamp',
-          });
-          const translateY = interpolate(wordSpring, [0, 1], [40, 0]);
+          const charStartFrame = index * 2;
+          const decodeFrames = 12;
+          const charFrame = frame - charStartFrame;
+
+          if (charFrame < 0) {
+            return (
+              <span
+                key={index}
+                style={{
+                  opacity: 0.15,
+                  color: `${accentColor}44`,
+                }}
+              >
+                0
+              </span>
+            );
+          }
+
+          const isResolved = charFrame >= decodeFrames;
+          let displayChar = char;
+
+          if (!isResolved) {
+            const glyphIndex = (frame * 11 + index * 17) % HEX_ASCII_GLYPHS.length;
+            displayChar = HEX_ASCII_GLYPHS[glyphIndex];
+          }
 
           return (
             <span
-              key={i}
+              key={index}
               style={{
-                opacity,
-                transform: `translateY(${translateY}px)`,
-                fontSize: typeof fontSize === 'number' ? `${fontSize}px` : fontSize,
-                fontWeight: '800',
-                color,
-                letterSpacing,
-                display: 'inline-block',
-                textTransform: 'uppercase',
+                color: isResolved ? color : accentColor,
+                opacity: isResolved ? 1 : 0.9,
+                textShadow: !isResolved ? `0 0 10px ${accentColor}` : 'none',
               }}
             >
-              {word}
+              {displayChar}
             </span>
           );
         })}
@@ -77,55 +109,26 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
     );
   }
 
-  if (mode === 'typewriter') {
-    const charsRevealed = Math.min(totalChars, Math.floor(frame / 2));
-    const revealedText = text.slice(0, charsRevealed);
-    const showCursor = Math.floor(frame / 15) % 2 === 0;
-
-    return (
-      <div
-        style={{
-          fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
-          fontSize: typeof fontSize === 'number' ? `${fontSize}px` : fontSize,
-          fontWeight: '700',
-          color,
-          letterSpacing,
-          textTransform: 'uppercase',
-          display: 'inline-block',
-        }}
-      >
-        <span>{revealedText}</span>
-        <span
-          style={{
-            color: accentColor,
-            opacity: showCursor ? 1 : 0,
-            marginLeft: '2px',
-          }}
-        >
-          _
-        </span>
-      </div>
-    );
-  }
-
-  if (mode === 'clip') {
-    const progress = spring({
+  // ENGINE 2: TRACK_MATTE_SLIDE - Text sliding up/down from behind overflow mask
+  if (activeEngine === 'TRACK_MATTE_SLIDE') {
+    const slideSpring = spring({
       frame,
       fps,
-      config: { damping: 15, mass: 0.8 },
+      config: { damping: 14, mass: 0.6 },
     });
-    const clipWidth = interpolate(progress, [0, 1], [0, 100]);
+    const translateY = interpolate(slideSpring, [0, 1], [100, 0]);
 
     return (
       <div
         style={{
-          position: 'relative',
-          display: 'inline-block',
           overflow: 'hidden',
+          display: 'inline-block',
+          padding: '4px 8px',
         }}
       >
         <div
           style={{
+            transform: `translateY(${translateY}%)`,
             fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
             fontSize: typeof fontSize === 'number' ? `${fontSize}px` : fontSize,
             fontWeight: '800',
@@ -133,7 +136,6 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
             letterSpacing,
             textTransform: 'uppercase',
             whiteSpace: 'nowrap',
-            clipPath: `polygon(0 0, ${clipWidth}% 0, ${clipWidth}% 100%, 0 100%)`,
           }}
         >
           {text}
@@ -142,64 +144,88 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
     );
   }
 
-  // Scramble / Matrix decode effect
-  return (
-    <div
-      style={{
-        display: 'inline-flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
-        fontSize: typeof fontSize === 'number' ? `${fontSize}px` : fontSize,
-        fontWeight: '700',
-        letterSpacing,
-        textTransform: 'uppercase',
-      }}
-    >
-      {chars.map((char, index) => {
-        if (char === ' ') {
-          return <span key={index} style={{ width: '0.4em' }} />;
-        }
+  // ENGINE 3: BLUR_TO_SHARP - Blur(20px) + opacity 0 -> Blur(0px) + opacity 1
+  if (activeEngine === 'BLUR_TO_SHARP') {
+    const progress = spring({
+      frame,
+      fps,
+      config: { damping: 16, mass: 0.5 },
+    });
+    const blurAmount = interpolate(progress, [0, 1], [20, 0]);
+    const opacity = interpolate(progress, [0, 1], [0, 1]);
+    const scale = interpolate(progress, [0, 1], [1.15, 1.0]);
 
-        const charStartFrame = index * 2;
-        const decodeFrames = 18;
-        const charFrame = frame - charStartFrame;
+    return (
+      <div
+        style={{
+          fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+          fontSize: typeof fontSize === 'number' ? `${fontSize}px` : fontSize,
+          fontWeight: '800',
+          color,
+          letterSpacing,
+          textTransform: 'uppercase',
+          filter: `blur(${blurAmount}px)`,
+          opacity,
+          transform: `scale(${scale})`,
+          display: 'inline-block',
+        }}
+      >
+        {text}
+      </div>
+    );
+  }
 
-        if (charFrame < 0) {
-          return (
-            <span
-              key={index}
-              style={{
-                opacity: 0.3,
-                color: `${accentColor}55`,
-              }}
-            >
-              0x
-            </span>
-          );
-        }
+  // ENGINE 4: STROKE_TRIM_PATH - SVG stroke reveal with write-on effect
+  if (activeEngine === 'STROKE_TRIM_PATH') {
+    const strokeProgress = interpolate(frame, [0, 30], [100, 0], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    });
+    const fillOpacity = interpolate(frame, [25, 45], [0, 1], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    });
 
-        const isResolved = charFrame >= decodeFrames;
-        let displayChar = char;
+    const parsedFontSize =
+      typeof fontSize === 'number' ? fontSize : parseInt(fontSize, 10) || 48;
 
-        if (!isResolved) {
-          const glyphIndex = (frame * 11 + index * 17) % HEX_ASCII_GLYPHS.length;
-          displayChar = HEX_ASCII_GLYPHS[glyphIndex];
-        }
-
-        return (
-          <span
-            key={index}
+    return (
+      <div
+        style={{
+          display: 'inline-block',
+          fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+        }}
+      >
+        <svg
+          height={parsedFontSize * 1.5}
+          width={text.length * (parsedFontSize * 0.7)}
+          style={{ overflow: 'visible' }}
+        >
+          <text
+            x="50%"
+            y="50%"
+            dominantBaseline="middle"
+            textAnchor="middle"
+            fill={color}
+            fillOpacity={fillOpacity}
+            stroke={accentColor}
+            strokeWidth="2"
+            strokeDasharray="100"
+            strokeDashoffset={strokeProgress}
             style={{
-              color: isResolved ? color : accentColor,
-              opacity: isResolved ? 1 : 0.9,
-              textShadow: !isResolved ? `0 0 10px ${accentColor}` : 'none',
+              fontSize: `${parsedFontSize}px`,
+              fontWeight: 800,
+              letterSpacing,
+              textTransform: 'uppercase',
+              filter: `drop-shadow(0 0 8px ${accentColor})`,
             }}
           >
-            {displayChar}
-          </span>
-        );
-      })}
-    </div>
-  );
+            {text}
+          </text>
+        </svg>
+      </div>
+    );
+  }
+
+  return null;
 };

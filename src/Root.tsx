@@ -64,12 +64,12 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={LogarithmicShellSchema.parse(logarithmicShellConfig)}
       />
 
-      {/* Infinite Continuous Loop Composition */}
+      {/* Infinite Continuous Loop Composition - Upgraded to 2,340 frames (39.0s @ 60FPS) */}
       <Composition
         id="InfiniteContinuousLoop-V1"
         component={InfiniteContinuousLoopScene}
         schema={InfiniteLoopSchema}
-        durationInFrames={1800}
+        durationInFrames={2340}
         fps={60}
         width={1920}
         height={1080}

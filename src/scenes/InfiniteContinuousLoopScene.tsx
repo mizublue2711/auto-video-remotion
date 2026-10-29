@@ -11,12 +11,25 @@ import {
 import { SwissGridBackground } from '../components/SwissGridBackground';
 import { SwissHudOverlay } from '../components/SwissHudOverlay';
 import { KineticTypography } from '../components/KineticTypography';
+import { RubikCube3D } from '../components/RubikCube3D';
 import { BentoGrid3D } from '../components/BentoGrid3D';
 import { MacCodeEditor } from '../components/MacCodeEditor';
 import { DualEngineCard } from '../components/DualEngineCard';
 import { IsometricMatrix3D } from '../components/IsometricMatrix3D';
 import { MarqueeTicker } from '../components/MarqueeTicker';
 import { InfiniteLoopProps } from '../schemas/infiniteLoopSchema';
+
+// Dynamic Audio Energy Curve map matching explicit phase boundaries
+const getAudioEnergy = (frame: number): number => {
+  if (frame < 180) return 0.4; // Phase 1 (0 -> 180)
+  if (frame < 720) return 0.8 + 0.4 * Math.sin(frame * 0.05); // Phase 2 (180 -> 720)
+  if (frame < 900) return 1.3; // Phase 3 (720 -> 900)
+  if (frame < 1170) return 1.5; // Phase 4 (900 -> 1170)
+  if (frame < 1440) return 1.7; // Phase 5 (1170 -> 1440)
+  if (frame < 1710) return 2.0; // Phase 6 (1440 -> 1710)
+  if (frame < 1980) return 2.5 + 0.5 * (frame % 27 < 5 ? 1 : 0); // Phase 7 drop climax (1710 -> 1980)
+  return Math.max(0.1, 1.5 * (1 - (frame - 1980) / 360)); // Phase 8 outro fade (1980 -> 2340)
+};
 
 export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
   backgroundColor = '#050505',
@@ -25,6 +38,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
   accentCyan = '#00E5FF',
   audioUrl = 'audio/signal-at-zero.mp3',
   bpm = 130,
+  animationType = 'TYPEWRITER_CHAR',
   title = 'ARTIFICIAL CRAFT',
   slogan = 'COMPLEX DATA. PURE VISUAL ART.',
   bentoNode1 = 'AUTOMATION',
@@ -47,8 +61,8 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Beat pulse calculation based on 130 BPM
-  const framesPerBeat = (60 * fps) / bpm; // ~27.692 frames/beat
+  // Beat pulse calculation based on 130 BPM (~27.69 frames per beat)
+  const framesPerBeat = (60 * fps) / bpm;
   const frameInBeat = frame % framesPerBeat;
   const beatPulseSpring = spring({
     frame: frameInBeat,
@@ -57,27 +71,18 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
   });
   const beatScale = 1 + beatPulseSpring * 0.04;
 
-  // 10-phase breakdown: 1800 frames total, 180 frames per phase
-  const phaseIndex = Math.min(9, Math.floor(frame / 180));
-  const phaseFrame = frame % 180; // 0 to 179
+  // Audio energy & Dispersion math formula
+  const audioEnergy = getAudioEnergy(frame);
+  const effectiveDispersion =
+    Math.abs(Math.sin((frame / 180) * Math.PI)) * audioEnergy;
 
-  // Submesh dispersion math for transitions (0 = fully formed, 1 = exploded/dispersed submesh)
-  const dispersionIn = interpolate(phaseFrame, [0, 25], [1, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
-  const dispersionOut = interpolate(phaseFrame, [155, 179], [0, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
-
-  // Implosion loop-back at frame 1799 back to frame 0 origin
-  const seamlessLoopFactor = interpolate(frame, [1740, 1799], [0, 1], {
+  // Implosion loop-back at Frame 2339 back to Frame 0 origin
+  const seamlessLoopFactor = interpolate(frame, [2280, 2339], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const activeDispersion = Math.max(dispersionIn, dispersionOut, seamlessLoopFactor);
+  const activeDispersion = Math.max(effectiveDispersion, seamlessLoopFactor);
 
   return (
     <AbsoluteFill
@@ -87,10 +92,10 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
         overflow: 'hidden',
       }}
     >
-      {/* Audio Track */}
+      {/* Beat-synced Audio Track */}
       {audioUrl && <Audio src={staticFile(audioUrl)} />}
 
-      {/* Swiss Grid Background with Active Laser Scanner */}
+      {/* Swiss Grid Background with Dynamic Laser Scan Line */}
       <SwissGridBackground
         backgroundColor={backgroundColor}
         gridColor={gridColor}
@@ -98,7 +103,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
         showScanLine={true}
       />
 
-      {/* Main 3D Stage Container */}
+      {/* Main Stage Container */}
       <div
         style={{
           position: 'absolute',
@@ -110,8 +115,8 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           transition: 'transform 0.05s ease-out',
         }}
       >
-        {/* PHASE 0: Title & Origin Core (Frames 0 - 179) */}
-        {phaseIndex === 0 && (
+        {/* PHASE 1: Swiss Grid & Laser Scan Initialization (Frames 0 -> 180) */}
+        {frame >= 0 && frame < 180 && (
           <div
             style={{
               textAlign: 'center',
@@ -119,8 +124,8 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
               flexDirection: 'column',
               alignItems: 'center',
               gap: '20px',
-              opacity: 1 - activeDispersion * 0.8,
-              transform: `scale(${1 - activeDispersion * 0.2})`,
+              opacity: 1 - activeDispersion * 0.5,
+              transform: `scale(${1 - activeDispersion * 0.15})`,
             }}
           >
             <div
@@ -146,7 +151,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
             </div>
             <KineticTypography
               text={title}
-              mode="scramble"
+              animationType={animationType}
               color="#FFFFFF"
               accentColor={accentCyan}
               fontSize="52px"
@@ -164,41 +169,123 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           </div>
         )}
 
-        {/* PHASE 1: Rhyme Line 1 & Vector Wireframe Lines (Frames 180 - 359) */}
-        {phaseIndex === 1 && (
+        {/* PHASE 2: Logarithmic Shell 3-Phase Script (Frames 180 -> 720) */}
+        {frame >= 180 && frame < 720 && (
           <div
             style={{
               textAlign: 'center',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '24px',
-              opacity: 1 - activeDispersion * 0.8,
+              gap: '28px',
+              opacity: 1 - activeDispersion * 0.5,
             }}
           >
-            <svg width="600" height="120" style={{ overflow: 'visible' }}>
-              <path
-                d="M 0 60 L 200 10 L 400 110 L 600 60"
-                fill="none"
-                stroke={accentCyan}
-                strokeWidth="3"
-                style={{ filter: `drop-shadow(0 0 10px ${accentCyan})` }}
-              />
-              <circle cx="200" cy="10" r="8" fill={primaryColor} />
-              <circle cx="400" cy="110" r="8" fill={primaryColor} />
-            </svg>
-            <KineticTypography
-              text={rhymeLine1}
-              mode="scramble"
-              color="#FFFFFF"
-              accentColor={accentCyan}
-              fontSize="38px"
-            />
+            {/* SUB-PHASE 2A (Frames 180 -> 360): 3D Wireframe Spiral Expands + RhymeLine 1 */}
+            {frame >= 180 && frame < 360 && (
+              <>
+                <svg width="600" height="140" style={{ overflow: 'visible' }}>
+                  <path
+                    d="M 0 70 Q 150 -20 300 70 T 600 70"
+                    fill="none"
+                    stroke={accentCyan}
+                    strokeWidth="3"
+                    style={{ filter: `drop-shadow(0 0 12px ${accentCyan})` }}
+                  />
+                  <circle cx="300" cy="70" r="10" fill={primaryColor} />
+                </svg>
+                <KineticTypography
+                  text={rhymeLine1}
+                  animationType="TYPEWRITER_CHAR"
+                  color="#FFFFFF"
+                  accentColor={accentCyan}
+                  fontSize="38px"
+                />
+              </>
+            )}
+
+            {/* SUB-PHASE 2B (Frames 360 -> 540): Vertex Falloff Sweep + RhymeLine 2 */}
+            {frame >= 360 && frame < 540 && (
+              <>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(5, 50px)',
+                    gridGap: '12px',
+                  }}
+                >
+                  {Array.from({ length: 15 }).map((_, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        width: '50px',
+                        height: '50px',
+                        border: `1px solid ${primaryColor}`,
+                        backgroundColor: i % 2 === 0 ? `${accentCyan}22` : 'transparent',
+                        boxShadow: i % 3 === 0 ? `0 0 10px ${accentCyan}` : 'none',
+                      }}
+                    />
+                  ))}
+                </div>
+                <KineticTypography
+                  text={rhymeLine2}
+                  animationType="TRACK_MATTE_SLIDE"
+                  color="#FFFFFF"
+                  accentColor={accentCyan}
+                  fontSize="38px"
+                />
+              </>
+            )}
+
+            {/* SUB-PHASE 2C (Frames 540 -> 720): Submesh Disintegration + RhymeLine 3 */}
+            {frame >= 540 && frame < 720 && (
+              <>
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '16px',
+                  }}
+                >
+                  {[metric1, metric2, metric3].map((m, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        padding: '12px 20px',
+                        backgroundColor: 'rgba(10,10,20,0.85)',
+                        border: `1px solid ${accentCyan}`,
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        color: '#FFFFFF',
+                      }}
+                    >
+                      {m}
+                    </div>
+                  ))}
+                </div>
+                <KineticTypography
+                  text={rhymeLine3}
+                  animationType="BLUR_TO_SHARP"
+                  color="#FFFFFF"
+                  accentColor={accentCyan}
+                  fontSize="38px"
+                />
+              </>
+            )}
           </div>
         )}
 
-        {/* PHASE 2: Bento Grid 3D (Frames 360 - 539) */}
-        {phaseIndex === 2 && (
+        {/* PHASE 3: 3D Rubik Cube Layer Rotations (Frames 720 -> 900) */}
+        {frame >= 720 && frame < 900 && (
+          <RubikCube3D
+            primaryColor={primaryColor}
+            accentCyan={accentCyan}
+            scale={1.0}
+            effectiveDispersion={activeDispersion}
+          />
+        )}
+
+        {/* PHASE 4: Bento Grid 3D Cards with 3D Tilt (Frames 900 -> 1170) */}
+        {frame >= 900 && frame < 1170 && (
           <BentoGrid3D
             node1={bentoNode1}
             node2={bentoNode2}
@@ -210,50 +297,8 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           />
         )}
 
-        {/* PHASE 3: Rhyme Line 2 & Submesh Disintegration (Frames 540 - 719) */}
-        {phaseIndex === 3 && (
-          <div
-            style={{
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '24px',
-              opacity: 1 - activeDispersion * 0.8,
-            }}
-          >
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 60px)',
-                gridGap: '12px',
-              }}
-            >
-              {Array.from({ length: 16 }).map((_, i) => (
-                <div
-                  key={i}
-                  style={{
-                    width: '60px',
-                    height: '60px',
-                    border: `1px solid ${primaryColor}`,
-                    backgroundColor: i % 2 === 0 ? `${accentCyan}22` : 'transparent',
-                    boxShadow: i % 3 === 0 ? `0 0 10px ${accentCyan}` : 'none',
-                  }}
-                />
-              ))}
-            </div>
-            <KineticTypography
-              text={rhymeLine2}
-              mode="typewriter"
-              color="#FFFFFF"
-              accentColor={accentCyan}
-              fontSize="38px"
-            />
-          </div>
-        )}
-
-        {/* PHASE 4: Mac Code Editor (Frames 720 - 899) */}
-        {phaseIndex === 4 && (
+        {/* PHASE 5: Mac Code Editor (Frames 1170 -> 1440) */}
+        {frame >= 1170 && frame < 1440 && (
           <MacCodeEditor
             codeSnippet={codeSnippet}
             primaryColor={primaryColor}
@@ -263,39 +308,8 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           />
         )}
 
-        {/* PHASE 5: Metrics Display (Frames 900 - 1079) */}
-        {phaseIndex === 5 && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-              alignItems: 'center',
-              opacity: 1 - activeDispersion * 0.8,
-            }}
-          >
-            {[metric1, metric2, metric3].map((m, idx) => (
-              <div
-                key={idx}
-                style={{
-                  padding: '16px 36px',
-                  backgroundColor: 'rgba(10, 10, 20, 0.9)',
-                  border: `2px solid ${idx === 0 ? accentCyan : primaryColor}`,
-                  boxShadow: `0 0 20px ${idx === 0 ? accentCyan : primaryColor}66`,
-                  fontSize: '24px',
-                  fontWeight: 800,
-                  color: '#FFFFFF',
-                  letterSpacing: '2px',
-                }}
-              >
-                {m}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* PHASE 6: Dual Engine Card (Frames 1080 - 1259) */}
-        {phaseIndex === 6 && (
+        {/* PHASE 6: Dual Engine Node Cards (Frames 1440 -> 1710) */}
+        {frame >= 1440 && frame < 1710 && (
           <DualEngineCard
             node1={dualEngineNode1}
             node2={dualEngineNode2}
@@ -306,8 +320,8 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           />
         )}
 
-        {/* PHASE 7: Isometric Matrix 3D (Frames 1260 - 1439) */}
-        {phaseIndex === 7 && (
+        {/* PHASE 7: Isometric Matrix 3D Climax Drop (Frames 1710 -> 1980) */}
+        {frame >= 1710 && frame < 1980 && (
           <IsometricMatrix3D
             primaryColor={primaryColor}
             accentCyan={accentCyan}
@@ -316,16 +330,17 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           />
         )}
 
-        {/* PHASE 8: Marquee Ticker & Rhyme Line 3 (Frames 1440 - 1619) */}
-        {phaseIndex === 8 && (
+        {/* PHASE 8: Marquee Ticker & Final Outro Implosion Back to Origin (Frames 1980 -> 2340) */}
+        {frame >= 1980 && frame <= 2340 && (
           <div
             style={{
               width: '100%',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '40px',
-              opacity: 1 - activeDispersion * 0.8,
+              gap: '36px',
+              opacity: interpolate(frame, [1980, 2020, 2300, 2340], [0, 1, 1, 1]),
+              transform: `scale(${interpolate(frame, [1980, 2340], [1.1, 1.0])})`,
             }}
           >
             <MarqueeTicker
@@ -333,30 +348,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
               primaryColor={primaryColor}
               accentCyan={accentCyan}
             />
-            <KineticTypography
-              text={rhymeLine3}
-              mode="scramble"
-              color="#FFFFFF"
-              accentColor={accentCyan}
-              fontSize="38px"
-            />
-          </div>
-        )}
 
-        {/* PHASE 9: Implosion Back to Origin & CTA (Frames 1620 - 1799) */}
-        {phaseIndex === 9 && (
-          <div
-            style={{
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '24px',
-              // On frame 1799, as seamlessLoopFactor -> 1, scale & structure implode exactly back to Phase 0 initial title
-              transform: `scale(${interpolate(phaseFrame, [0, 179], [1.2, 1.0])})`,
-              opacity: interpolate(phaseFrame, [0, 120, 179], [1, 1, 1]),
-            }}
-          >
             <div
               style={{
                 width: '120px',
@@ -378,13 +370,15 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
                 }}
               />
             </div>
+
             <KineticTypography
               text={title}
-              mode="scramble"
+              animationType="STROKE_TRIM_PATH"
               color="#FFFFFF"
               accentColor={accentCyan}
-              fontSize="52px"
+              fontSize="48px"
             />
+
             <div
               style={{
                 padding: '10px 28px',
@@ -402,7 +396,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
         )}
       </div>
 
-      {/* Real-time flickering HUD Telemetry Overlay on top of all 3D layers */}
+      {/* Persistent HUD Overlay active across all frames (0 -> 2340) */}
       <SwissHudOverlay
         primaryColor={primaryColor}
         accentCyan={accentCyan}

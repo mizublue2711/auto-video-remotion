@@ -120,10 +120,13 @@ export const MacCodeEditor: React.FC<MacCodeEditorProps> = ({
           <div style={{ paddingLeft: '20px', whiteSpace: 'pre', overflowX: 'hidden' }}>
             {lines.map((line, lineIdx) => {
               // Basic syntax highlight coloring
-              const styledLine = line
-                .replace(/(import|export|const|from|return)/g, `<span style="color:#C084FC;font-weight:bold">$1</span>`)
-                .replace(/(AbsoluteFill|SwissGridBackground|LogarithmicSpiral3D|LogarithmicShell)/g, `<span style="color:${accentCyan};font-weight:bold">$1</span>`)
-                .replace(/('[^']*'|"[^"]*")/g, `<span style="color:#34D399">$1</span>`);
+              const escapeHtml = (str: string) => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+              const escaped = escapeHtml(line);
+
+              const styledLine = escaped
+                .replace(/(&#39;[^&#39;]*&#39;|'[^']*'|"[^"]*")/g, `<span style="color:#34D399">$1</span>`)
+                .replace(/\b(import|export|const|from|return)\b/g, `<span style="color:#C084FC;font-weight:bold">$1</span>`)
+                .replace(/\b(AbsoluteFill|SwissGridBackground|LogarithmicSpiral3D|LogarithmicShell)\b/g, `<span style="color:${accentCyan};font-weight:bold">$1</span>`);
 
               return (
                 <div
