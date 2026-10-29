@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { brandSchema } from './brand.js';
-import { videoSpecsSchema } from './videoSpecs.js';
+import { brandSchema } from './brand';
+import { videoSpecsSchema } from './videoSpecs';
 import {
   featureItemSchema,
   mediaAssetSchema,
   ctaSchema,
   heroSchema,
-} from './websiteShowcase.js';
+} from './websiteShowcase';
 
 export const datasetShowcaseSchema = z.object({
   brand: brandSchema.optional(),

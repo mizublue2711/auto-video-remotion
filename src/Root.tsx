@@ -9,6 +9,8 @@ import websiteAConfig from '../site-configs/website-a.json';
 import { LogarithmicShellScene } from './scenes/LogarithmicShellScene';
 import { LogarithmicShellSchema } from './schemas/logarithmicShellSchema';
 import logarithmicShellConfig from '../site-configs/logarithmic-shell-v1.json';
+import { websiteShowcaseSchema } from './schemas/websiteShowcase';
+import { RemotionConfigSchema } from './schemas/index';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -17,30 +19,32 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="MasterDirectorScene"
         component={MasterDirectorScene}
+        schema={RemotionConfigSchema}
         durationInFrames={180}
         fps={60}
         width={1920}
         height={1080}
-        defaultProps={{
+        defaultProps={RemotionConfigSchema.parse({
+          brand: {
+            name: 'ARTIFICIAL CRAFT',
+            primaryColor: '#00E5FF',
+            backgroundColor: '#050505',
+          },
           title: 'ARTIFICIAL CRAFT',
-          slogan: 'FPS MEETS AI AUTOMATION',
-          mockupUrl: 'https://artificialcraft.space/og.png',
-          metrics: [
-            { label: 'FPS', value: '60' },
-            { label: 'PRECISION SLA', value: '99.99%' },
-          ],
-        }}
+          subtitle: 'FPS MEETS AI AUTOMATION',
+        })}
       />
 
       {/* Website Showcase Composition */}
       <Composition
         id="WebsiteShowcase"
         component={WebsiteShowcase}
+        schema={websiteShowcaseSchema}
         durationInFrames={150}
         fps={30}
         width={1920}
         height={1080}
-        defaultProps={websiteAConfig as WebsiteShowcaseProps}
+        defaultProps={websiteShowcaseSchema.parse(websiteAConfig) as WebsiteShowcaseProps}
       />
 
       {/* Logarithmic Shell Composition */}
@@ -52,7 +56,7 @@ export const RemotionRoot: React.FC = () => {
         fps={60}
         width={1920}
         height={1080}
-        defaultProps={logarithmicShellConfig}
+        defaultProps={LogarithmicShellSchema.parse(logarithmicShellConfig)}
       />
     </>
   );
