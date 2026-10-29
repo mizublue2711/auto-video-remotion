@@ -43,7 +43,7 @@ export const RemotionRoot: React.FC = () => {
       {/* Website Showcase Composition */}
       <Composition
         id="WebsiteShowcase"
-        component={WebsiteShowcase}
+        component={WebsiteShowcase as React.FC<any>}
         schema={websiteShowcaseSchema}
         durationInFrames={150}
         fps={30}

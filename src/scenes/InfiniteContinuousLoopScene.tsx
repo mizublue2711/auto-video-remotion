@@ -19,19 +19,6 @@ import { IsometricMatrix3D } from '../components/IsometricMatrix3D';
 import { MarqueeTicker } from '../components/MarqueeTicker';
 import { InfiniteLoopProps } from '../schemas/infiniteLoopSchema';
 
-// Continuous harmonic sine wave audio energy curve matching explicit phase boundaries
-const getAudioEnergy = (frame: number): number => {
-  const smoothPulse = (1 + Math.sin((2 * Math.PI * frame) / 27.69)) / 2;
-  if (frame < 180) return 0.4; // Phase 1 (0 -> 180)
-  if (frame < 720) return 0.8 + 0.4 * Math.sin(frame * 0.05); // Phase 2 (180 -> 720)
-  if (frame < 900) return 1.3; // Phase 3 (720 -> 900)
-  if (frame < 1170) return 1.5; // Phase 4 (900 -> 1170)
-  if (frame < 1440) return 1.7; // Phase 5 (1170 -> 1440)
-  if (frame < 1710) return 2.0; // Phase 6 (1440 -> 1710)
-  if (frame < 1980) return 2.5 + 0.5 * smoothPulse; // Phase 7 drop climax (1710 -> 1980)
-  return Math.max(0.1, 1.5 * (1 - (frame - 1980) / 360)); // Phase 8 outro fade (1980 -> 2340)
-};
-
 export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
   backgroundColor = '#050505',
   gridColor = '#222222',
@@ -57,31 +44,24 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
 }) => {
   const frame = useCurrentFrame();
 
-  // Continuous harmonic sine wave (no legacy stutter) based on ~27.69 frames per beat @ 130 BPM
-  const smoothPulse = (1 + Math.sin((2 * Math.PI * frame) / 27.69)) / 2;
-  const beatScale = 1 + smoothPulse * 0.04;
+  // Continuous camera push-in across all frames (0 -> 2,340 frames / 39.0s @ 60FPS)
+  const cameraScale = interpolate(
+    frame,
+    [0, 2340],
+    [0.85, 1.65],
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.42, 0, 0.58, 1),
+    }
+  );
 
-  // Cinematic Camera Push-In (Frames 60 -> 360 / Sec 1 -> 6)
-  const cameraScale = interpolate(frame, [60, 360], [0.75, 1.60], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-    easing: Easing.out(Easing.cubic),
-  });
+  // Clamped dispersion amount for readability and staying centered
+  const dispersionAmount = frame >= 720 ? 0.12 : 0.08;
 
-  // Audio energy calculation
-  const audioEnergy = getAudioEnergy(frame);
-
-  // Hardcoded dispersion amount for frame >= 720 so content cards never fly off-screen and remain readable
-  const dispersionAmount =
-    frame >= 720
-      ? 0.12
-      : Math.abs(Math.sin((frame / 180) * Math.PI)) * audioEnergy;
-
-  // 3D Euler rotations channeled from music (Frames 720 -> 2340 / Sec 12 -> 39)
-  const rotationY =
-    interpolate(frame, [720, 2340], [0, 1080]) +
-    Math.sin((2 * Math.PI * frame) / 27.69) * 12 * audioEnergy;
-  const rotationX = Math.cos((Math.PI * frame) / 180) * 8 * audioEnergy;
+  // Pure 3D Axis Rotations (Frames 720 -> 2340 / Sec 12 -> 39)
+  const rotationY = interpolate(frame, [720, 2340], [0, 1080]);
+  const rotationX = Math.cos((Math.PI * frame) / 180) * 8;
 
   // Outro implosion (Frames 1980 -> 2340 / Sec 33 -> 39) back to origin (0,0,0) for seamless looping into Frame 0
   const outroProgress = interpolate(frame, [1980, 2340], [0, 1], {
@@ -100,7 +80,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
         overflow: 'hidden',
       }}
     >
-      {/* Beat-synced Audio Track */}
+      {/* Background Audio Track */}
       {audioUrl && <Audio src={staticFile(audioUrl)} />}
 
       {/* Swiss Grid Background with Dynamic Laser Scan Line */}
@@ -111,7 +91,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
         showScanLine={true}
       />
 
-      {/* Main Stage Container with Cinematic Camera Push-In & Continuous Harmonic Pulse */}
+      {/* Main Stage Container with Continuous Smooth Camera Push-In */}
       <div
         style={{
           position: 'absolute',
@@ -119,8 +99,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          transform: `scale(${cameraScale * beatScale * (overallScale / 1.6)})`,
-          transition: 'transform 0.05s ease-out',
+          transform: `scale(${cameraScale * (overallScale / 1.6)})`,
         }}
       >
         {/* PHASE 1: Swiss Grid & Laser Scan Initialization (Frames 0 -> 180) */}
@@ -284,7 +263,7 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
           </div>
         )}
 
-        {/* PHASES 3 -> 8 (Frames 720 -> 2340): 3D Euler Rotations Container */}
+        {/* PHASES 3 -> 8 (Frames 720 -> 2340): Pure 3D Euler Rotations Container */}
         {frame >= 720 && frame <= 2340 && (
           <div
             style={{
