@@ -84,26 +84,26 @@ export const LogarithmicSpiral3D: React.FC<LogarithmicSpiral3DProps> = ({
   let rotX = 0;
   let rotY = 0;
   let rotZ = 0;
-  let overallScale = 1.0;
+  let overallScale = 2.0;
 
   if (phase === 1) {
     // Skeletal Ticking Pulse: Shallow 3D angle, spiral expanding from origin
     rotX = interpolate(phaseProgress, [0, 1], [0.1, 0.35]);
     rotY = interpolate(phaseProgress, [0, 1], [0, 0.4]);
     rotZ = frame * 0.005;
-    overallScale = interpolate(phaseProgress, [0, 1], [0.1, 1.0]);
+    overallScale = interpolate(phaseProgress, [0, 1], [0.2, 1.6]);
   } else if (phase === 2) {
     // Forge Dynamic: Deep 3D tilt, continuous rotation & orbital dynamic sweep
     rotX = 0.35 + Math.sin(frame * 0.015) * 0.25;
     rotY = 0.4 + Math.cos(frame * 0.02) * 0.35;
     rotZ = frame * 0.01;
-    overallScale = 1.0 + Math.sin(phaseProgress * Math.PI) * 0.15;
+    overallScale = 1.6 + Math.sin(phaseProgress * Math.PI) * 0.2;
   } else if (phase === 3) {
     // Submesh Purge: Split perspective, audio-reactive scaling, orbital rotation
     rotX = 0.5 + Math.sin(frame * 0.03) * 0.2;
     rotY = frame * 0.015;
     rotZ = frame * 0.02;
-    overallScale = 1.1 + Math.sin(frame * 0.2) * 0.05; // Audio reactive pulse
+    overallScale = 1.8 + Math.sin(frame * 0.2) * 0.05; // Audio reactive pulse
   } else {
     // Phase 4: Magnetic collapse back into Swiss Brutalism logo box, then collapse to dot at end
     const collapseSpring = spring({
