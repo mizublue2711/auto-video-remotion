@@ -1,19 +1,19 @@
 import { z } from 'zod';
-import { brandSchema } from './brand.js';
-import { videoSpecsSchema } from './videoSpecs.js';
+import { brandSchema } from './brand';
+import { videoSpecsSchema } from './videoSpecs';
 import {
   websiteShowcaseSchema,
   featureItemSchema,
   mediaAssetSchema,
   ctaSchema,
   heroSchema,
-} from './websiteShowcase.js';
-import { datasetShowcaseSchema } from './datasetShowcase.js';
+} from './websiteShowcase';
+import { datasetShowcaseSchema } from './datasetShowcase';
 
-export * from './brand.js';
-export * from './videoSpecs.js';
-export * from './websiteShowcase.js';
-export * from './datasetShowcase.js';
+export * from './brand';
+export * from './videoSpecs';
+export * from './websiteShowcase';
+export * from './datasetShowcase';
 export * from './logarithmicShellSchema';
 
 export const RemotionConfigSchema = z.object({
