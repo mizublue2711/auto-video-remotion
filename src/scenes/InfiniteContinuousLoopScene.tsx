@@ -44,24 +44,28 @@ export const InfiniteContinuousLoopScene: React.FC<InfiniteLoopProps> = ({
 }) => {
   const frame = useCurrentFrame();
 
-  // Continuous camera push-in across all frames (0 -> 2,340 frames / 39.0s @ 60FPS)
+  // Cinematic camera push-in towards central content (Frames 60 -> 360)
   const cameraScale = interpolate(
     frame,
-    [0, 2340],
-    [0.85, 1.65],
+    [60, 360],
+    [0.75, 1.60],
     {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
-      easing: Easing.bezier(0.42, 0, 0.58, 1),
+      easing: Easing.out(Easing.cubic),
     }
   );
+
+  const getAudioEnergy = (f: number) => (1 + Math.sin((2 * Math.PI * f) / 27.69)) / 2;
 
   // Clamped dispersion amount for readability and staying centered
   const dispersionAmount = frame >= 720 ? 0.12 : 0.08;
 
-  // Pure 3D Axis Rotations (Frames 720 -> 2340 / Sec 12 -> 39)
-  const rotationY = interpolate(frame, [720, 2340], [0, 1080]);
-  const rotationX = Math.cos((Math.PI * frame) / 180) * 8;
+  // Channel Music into 3D Euler Rotations (Frames 720 -> 2340)
+  const rotationY =
+    interpolate(frame, [720, 2340], [0, 1080]) +
+    Math.sin((2 * Math.PI * frame) / 27.69) * 12 * getAudioEnergy(frame);
+  const rotationX = Math.cos((Math.PI * frame) / 180) * 8 * getAudioEnergy(frame);
 
   // Outro implosion (Frames 1980 -> 2340 / Sec 33 -> 39) back to origin (0,0,0) for seamless looping into Frame 0
   const outroProgress = interpolate(frame, [1980, 2340], [0, 1], {
