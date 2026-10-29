@@ -11,7 +11,7 @@ export interface KineticTypographyProps {
   className?: string;
 }
 
-const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=/<>[]{}';
+const HEX_ASCII_GLYPHS = '0123456789ABCDEFabcdef!@#$%^&*()_+-=[]{}|;:,.<>?/X';
 
 export const KineticTypography: React.FC<KineticTypographyProps> = ({
   text = 'DYNAMIC MOTION ENGINE',
@@ -78,7 +78,6 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
   }
 
   if (mode === 'typewriter') {
-    // Typewriter effect: reveals letters one by one every few frames
     const charsRevealed = Math.min(totalChars, Math.floor(frame / 2));
     const revealedText = text.slice(0, charsRevealed);
     const showCursor = Math.floor(frame / 15) % 2 === 0;
@@ -110,7 +109,6 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
   }
 
   if (mode === 'clip') {
-    // Text clipping reveal: sliding box mask
     const progress = spring({
       frame,
       fps,
@@ -144,7 +142,7 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
     );
   }
 
-  // Default: 'scramble' / Matrix decode effect
+  // Scramble / Matrix decode effect
   return (
     <div
       style={{
@@ -163,9 +161,8 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
           return <span key={index} style={{ width: '0.4em' }} />;
         }
 
-        // Each character resolves after a staggered frame duration
         const charStartFrame = index * 2;
-        const decodeFrames = 18; // duration of scramble
+        const decodeFrames = 18;
         const charFrame = frame - charStartFrame;
 
         if (charFrame < 0) {
@@ -173,11 +170,11 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
             <span
               key={index}
               style={{
-                opacity: 0,
-                color: '#444444',
+                opacity: 0.3,
+                color: `${accentColor}55`,
               }}
             >
-              _
+              0x
             </span>
           );
         }
@@ -186,9 +183,8 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
         let displayChar = char;
 
         if (!isResolved) {
-          // Select pseudo-random glyph based on current frame and char index
-          const glyphIndex = (frame * 7 + index * 13) % GLYPHS.length;
-          displayChar = GLYPHS[glyphIndex];
+          const glyphIndex = (frame * 11 + index * 17) % HEX_ASCII_GLYPHS.length;
+          displayChar = HEX_ASCII_GLYPHS[glyphIndex];
         }
 
         return (
@@ -196,9 +192,8 @@ export const KineticTypography: React.FC<KineticTypographyProps> = ({
             key={index}
             style={{
               color: isResolved ? color : accentColor,
-              opacity: isResolved ? 1 : 0.85,
-              textShadow: !isResolved ? `0 0 8px ${accentColor}` : 'none',
-              transition: 'color 0.1s ease',
+              opacity: isResolved ? 1 : 0.9,
+              textShadow: !isResolved ? `0 0 10px ${accentColor}` : 'none',
             }}
           >
             {displayChar}
