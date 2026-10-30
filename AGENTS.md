@@ -1,4 +1,4 @@
-### GOOGLE JULES AGENT PROTOCOL & RULES
+### AGENT PROTOCOL & RULES
 **Repository:** auto-video-remotion (Centralized Video Render Engine)
 This file defines non-negotiable architectural rules, directory constraints, motion parameters, and security standards for Google Jules when working on this repository.
 
@@ -73,3 +73,14 @@ Before submitting any Pull Request:
 1.  **Validate Configs:** Run `npm run validate:configs` and ensure all JSON files pass schema validation.
 2.  **TypeScript Check:** Run `npx tsc --noEmit` and ensure **ZERO (0) errors**.
 3.  **Open PR:** Submit PR against branch `main` with a clear summary of changes.
+4.  
+--------------------------------------------------------------------------------
+
+#### 8.  REGULATORY RULE — ENGINE ADAPTER PATTERN:
+All low-level visuals (src/components/) MUST remain Pure UI (accepting primitive props: frame, progress, audioEnergy, src).
+All third-party motion engines (@remotion/*, @rive-app/*, lottie-react, three.js) MUST be wrapped inside dedicated Adapter components (src/adapters/).
+Master Scenes or Web Pages import Adapters, while Adapters feed converted props into Pure UI Components.
+
+--------------------------------------------------------------------------------
+
+
