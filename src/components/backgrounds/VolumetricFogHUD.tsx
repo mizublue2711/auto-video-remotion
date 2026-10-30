@@ -1,18 +1,19 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, random, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface VolumetricFogHUDProps {
-  backgroundColor?: string;
-  primaryColor?: string;
-}
+export interface VolumetricFogHUDProps extends BasePresetProps {}
 
 export const VolumetricFogHUD: React.FC<VolumetricFogHUDProps> = ({
+  frame: frameProp,
   backgroundColor = '#040608',
   primaryColor = '#00E5FF',
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
-  // Mechanical flicker for indicators
   const flickerSeed = Math.floor(frame / 3);
   const isFlickering = random(flickerSeed) > 0.85;
 
@@ -21,10 +22,12 @@ export const VolumetricFogHUD: React.FC<VolumetricFogHUDProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
         fontFamily: "'JetBrains Mono', monospace",
+        ...style,
       }}
     >
       {/* Volumetric Light Fog Blobs */}

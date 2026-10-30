@@ -1,23 +1,25 @@
 import React from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface SubmeshMorphEngineProps {
+export interface SubmeshMorphEngineProps extends BasePresetProps {
   vertexCount?: number;
   radius?: number;
-  primaryColor?: string;
   renderVertex?: (index: number, x: number, y: number) => React.ReactNode;
 }
 
 export const SubmeshMorphEngine: React.FC<SubmeshMorphEngineProps> = ({
+  frame: frameProp,
   vertexCount = 12,
   radius = 200,
   primaryColor = '#00E5FF',
   renderVertex,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
-  // Morph progress oscillating between circle layout and polygon star layout
   const morphProgress = interpolate(
     Math.sin(frame * 0.04),
     [-1, 1],
@@ -27,9 +29,7 @@ export const SubmeshMorphEngine: React.FC<SubmeshMorphEngineProps> = ({
   const vertices = Array.from({ length: vertexCount }, (_, i) => {
     const baseAngle = (i / vertexCount) * Math.PI * 2;
 
-    // Circle distance
     const rCircle = radius;
-    // Morph distance (alternating inner/outer star polygon)
     const rPolygon = i % 2 === 0 ? radius * 1.4 : radius * 0.6;
 
     const currentRadius = interpolate(morphProgress, [0, 1], [rCircle, rPolygon]);
@@ -42,14 +42,15 @@ export const SubmeshMorphEngine: React.FC<SubmeshMorphEngineProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       <div style={{ position: 'relative', width: 0, height: 0 }}>
-        {/* Render connecting mesh lines */}
         <svg
           style={{
             position: 'absolute',

@@ -1,27 +1,31 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface HolographicBlueprintBgProps {
-  backgroundColor?: string;
-  primaryColor?: string;
-}
+export interface HolographicBlueprintBgProps extends BasePresetProps {}
 
 export const HolographicBlueprintBg: React.FC<HolographicBlueprintBgProps> = ({
+  frame: frameProp,
   backgroundColor = '#030A16',
   primaryColor = '#00E5FF',
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const rotY = interpolate(frame, [0, 300], [0, 360]);
   const rotX = interpolate(Math.sin(frame * 0.02), [-1, 1], [15, 35]);
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
         perspective: '1000px',
         fontFamily: "'JetBrains Mono', monospace",
+        ...style,
       }}
     >
       {/* CAD Grid Background */}

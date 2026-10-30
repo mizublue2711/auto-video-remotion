@@ -1,18 +1,21 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, random, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface ParticleTunnelBgProps {
-  backgroundColor?: string;
-  primaryColor?: string;
+export interface ParticleTunnelBgProps extends BasePresetProps {
   particleCount?: number;
 }
 
 export const ParticleTunnelBg: React.FC<ParticleTunnelBgProps> = ({
+  frame: frameProp,
   backgroundColor = '#050505',
   primaryColor = '#00E5FF',
   particleCount = 80,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const particles = Array.from({ length: particleCount }, (_, i) => {
     const seed = i * 333;
@@ -20,10 +23,9 @@ export const ParticleTunnelBg: React.FC<ParticleTunnelBgProps> = ({
     const radius = 150 + random(seed + 1) * 600;
     const initialZ = random(seed + 2) * 2000;
 
-    // Accelerating tunnel depth movement
     const zSpeed = 12 + random(seed + 3) * 8;
     const rawZ = (initialZ + frame * zSpeed) % 2000;
-    const zPos = 2000 - rawZ; // Moves from far (+2000) to near (0)
+    const zPos = 2000 - rawZ;
 
     const opacity = interpolate(zPos, [0, 500, 1800, 2000], [0, 0.9, 0.5, 0]);
     const size = interpolate(zPos, [0, 2000], [8, 1]);
@@ -42,6 +44,7 @@ export const ParticleTunnelBg: React.FC<ParticleTunnelBgProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
@@ -49,6 +52,7 @@ export const ParticleTunnelBg: React.FC<ParticleTunnelBgProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       <div

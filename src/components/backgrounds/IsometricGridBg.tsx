@@ -1,26 +1,30 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface IsometricGridBgProps {
-  backgroundColor?: string;
-  primaryColor?: string;
+export interface IsometricGridBgProps extends BasePresetProps {
   gridSize?: number;
   gridRows?: number;
   gridCols?: number;
 }
 
 export const IsometricGridBg: React.FC<IsometricGridBgProps> = ({
+  frame: frameProp,
   backgroundColor = '#050505',
   primaryColor = '#00E5FF',
   gridRows = 16,
   gridCols = 16,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const planeYTranslation = interpolate(frame % 180, [0, 180], [0, 60]);
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
@@ -28,6 +32,7 @@ export const IsometricGridBg: React.FC<IsometricGridBgProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       <div
@@ -46,7 +51,6 @@ export const IsometricGridBg: React.FC<IsometricGridBgProps> = ({
           const r = Math.floor(idx / gridCols);
           const c = idx % gridCols;
 
-          // Compute pulse opacity based on radial distance and frame
           const distFromCenter = Math.sqrt((r - gridRows / 2) ** 2 + (c - gridCols / 2) ** 2);
           const pulseWave = Math.sin(distFromCenter * 0.5 - frame * 0.08);
           const opacity = interpolate(pulseWave, [-1, 1], [0.08, 0.65]);

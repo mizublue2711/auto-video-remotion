@@ -1,7 +1,8 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface FibonacciSpiralEngineProps {
+export interface FibonacciSpiralEngineProps extends BasePresetProps {
   itemCount?: number;
   scaleFactor?: number;
   renderItem?: (index: number, x: number, y: number) => React.ReactNode;
@@ -10,12 +11,17 @@ export interface FibonacciSpiralEngineProps {
 const GOLDEN_ANGLE_RAD = 137.5 * (Math.PI / 180);
 
 export const FibonacciSpiralEngine: React.FC<FibonacciSpiralEngineProps> = ({
+  frame: frameProp,
   itemCount = 34,
   scaleFactor = 40,
+  primaryColor = '#00E5FF',
   renderItem,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
+  const { fps = 60 } = useVideoConfig() || {};
 
   const rotOffset = frame * 0.01;
 
@@ -37,10 +43,12 @@ export const FibonacciSpiralEngine: React.FC<FibonacciSpiralEngineProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       <div style={{ position: 'relative', width: 0, height: 0 }}>
@@ -60,8 +68,8 @@ export const FibonacciSpiralEngine: React.FC<FibonacciSpiralEngineProps> = ({
                     width: '24px',
                     height: '24px',
                     borderRadius: '50%',
-                    backgroundColor: '#00E5FF',
-                    boxShadow: '0 0 10px #00E5FF',
+                    backgroundColor: primaryColor,
+                    boxShadow: `0 0 10px ${primaryColor}`,
                   }}
                 />
               )}

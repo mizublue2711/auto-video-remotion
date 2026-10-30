@@ -1,7 +1,8 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface ParametricCircleEngineProps {
+export interface ParametricCircleEngineProps extends BasePresetProps {
   itemCount?: number;
   radius?: number;
   pulseSpeed?: number;
@@ -10,14 +11,18 @@ export interface ParametricCircleEngineProps {
 }
 
 export const ParametricCircleEngine: React.FC<ParametricCircleEngineProps> = ({
+  frame: frameProp,
   itemCount = 8,
   radius = 250,
   pulseSpeed = 0.05,
   renderItem,
   children,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
+  const { fps = 60 } = useVideoConfig() || {};
 
   const springScale = spring({
     frame,
@@ -39,10 +44,12 @@ export const ParametricCircleEngine: React.FC<ParametricCircleEngineProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       <div style={{ position: 'relative', width: 0, height: 0 }}>

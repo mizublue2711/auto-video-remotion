@@ -1,20 +1,22 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface QuantumWaveformBgProps {
-  backgroundColor?: string;
-  primaryColor?: string;
-  secondaryColor?: string;
+export interface QuantumWaveformBgProps extends BasePresetProps {
   waveCount?: number;
 }
 
 export const QuantumWaveformBg: React.FC<QuantumWaveformBgProps> = ({
+  frame: frameProp,
   backgroundColor = '#050505',
   primaryColor = '#00E5FF',
   secondaryColor = '#7000FF',
   waveCount = 5,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const width = 1920;
   const height = 1080;
@@ -44,12 +46,14 @@ export const QuantumWaveformBg: React.FC<QuantumWaveformBgProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       <svg

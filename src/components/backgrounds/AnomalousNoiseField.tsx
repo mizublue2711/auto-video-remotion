@@ -1,25 +1,27 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, random, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface AnomalousNoiseFieldProps {
-  backgroundColor?: string;
-  primaryColor?: string;
+export interface AnomalousNoiseFieldProps extends BasePresetProps {
   particleCount?: number;
 }
 
 export const AnomalousNoiseField: React.FC<AnomalousNoiseFieldProps> = ({
+  frame: frameProp,
   backgroundColor = '#050505',
   primaryColor = '#00E5FF',
   particleCount = 100,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const particles = Array.from({ length: particleCount }, (_, idx) => {
     const seed = idx * 777;
     const baseX = random(seed) * 1920;
     const baseY = random(seed + 1) * 1080;
 
-    // Free dispersion wandering motion using harmonic sine waves
     const dispX = Math.sin(frame * 0.03 + idx) * 40 + Math.cos(frame * 0.01 + idx * 2) * 20;
     const dispY = Math.cos(frame * 0.025 + idx) * 40 + Math.sin(frame * 0.015 + idx * 3) * 20;
 
@@ -41,9 +43,11 @@ export const AnomalousNoiseField: React.FC<AnomalousNoiseFieldProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
+        ...style,
       }}
     >
       {particles.map((p, idx) => (

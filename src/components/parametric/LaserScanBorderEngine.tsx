@@ -1,27 +1,30 @@
 import React from 'react';
-import { interpolate, useCurrentFrame } from 'remotion';
+import { useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface LaserScanBorderEngineProps {
+export interface LaserScanBorderEngineProps extends BasePresetProps {
   children?: React.ReactNode;
-  primaryColor?: string;
   borderRadius?: number;
   borderWidth?: number;
-  style?: React.CSSProperties;
 }
 
 export const LaserScanBorderEngine: React.FC<LaserScanBorderEngineProps> = ({
+  frame: frameProp,
   children,
   primaryColor = '#00E5FF',
   borderRadius = 16,
   borderWidth = 1,
+  className,
   style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const angle = (frame * 3) % 360;
 
   return (
     <div
+      className={className}
       style={{
         position: 'relative',
         borderRadius: `${borderRadius}px`,

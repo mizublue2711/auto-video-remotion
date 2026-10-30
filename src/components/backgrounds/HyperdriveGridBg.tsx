@@ -1,27 +1,32 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface HyperdriveGridBgProps {
-  backgroundColor?: string;
-  primaryColor?: string;
+export interface HyperdriveGridBgProps extends BasePresetProps {
   ringCount?: number;
 }
 
 export const HyperdriveGridBg: React.FC<HyperdriveGridBgProps> = ({
+  frame: frameProp,
   backgroundColor = '#050505',
   primaryColor = '#00E5FF',
   ringCount = 12,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       {/* Concentric expanding grid rings towards viewer */}
@@ -30,7 +35,6 @@ export const HyperdriveGridBg: React.FC<HyperdriveGridBgProps> = ({
         const offset = (idx / ringCount);
         const progress = (frame * speed + offset) % 1;
 
-        // Exponential scale to mimic 3D perspective warp
         const scale = Math.pow(progress, 3) * 8;
         const opacity = interpolate(progress, [0, 0.2, 0.8, 1], [0, 0.8, 0.4, 0]);
 

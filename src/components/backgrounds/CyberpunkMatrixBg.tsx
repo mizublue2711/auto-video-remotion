@@ -1,9 +1,8 @@
 import React from 'react';
 import { AbsoluteFill, random, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface CyberpunkMatrixBgProps {
-  backgroundColor?: string;
-  primaryColor?: string;
+export interface CyberpunkMatrixBgProps extends BasePresetProps {
   columnCount?: number;
   charsPerColumn?: number;
 }
@@ -11,12 +10,16 @@ export interface CyberpunkMatrixBgProps {
 const HEX_CHARS = '0123456789ABCDEF$#@%&*<>{}[]+=~?';
 
 export const CyberpunkMatrixBg: React.FC<CyberpunkMatrixBgProps> = ({
+  frame: frameProp,
   backgroundColor = '#050505',
   primaryColor = '#00E5FF',
   columnCount = 36,
   charsPerColumn = 24,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const columns = Array.from({ length: columnCount }, (_, colIdx) => {
     const seed = colIdx * 1000;
@@ -49,10 +52,12 @@ export const CyberpunkMatrixBg: React.FC<CyberpunkMatrixBgProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         overflow: 'hidden',
         fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+        ...style,
       }}
     >
       {/* Matrix rain columns */}

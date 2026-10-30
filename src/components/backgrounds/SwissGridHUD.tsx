@@ -1,24 +1,26 @@
 import React from 'react';
 import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface SwissGridHUDProps {
-  backgroundColor?: string;
-  gridColor?: string;
-  primaryColor?: string;
+export interface SwissGridHUDProps extends BasePresetProps {
   gridSize?: number;
   showScanLine?: boolean;
   showTelemetryCorners?: boolean;
 }
 
 export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
+  frame: frameProp,
   backgroundColor = '#050505',
   gridColor = '#1A1A24',
   primaryColor = '#00E5FF',
   gridSize = 60,
   showScanLine = true,
   showTelemetryCorners = true,
+  className,
+  style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const scanProgress = (frame % 120) / 120;
   const laserY = interpolate(scanProgress, [0, 1], [0, 1080]);
@@ -31,12 +33,14 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
 
   return (
     <AbsoluteFill
+      className={className}
       style={{
         backgroundColor,
         backgroundImage: `linear-gradient(${gridColor} 1px, transparent 1px), linear-gradient(90deg, ${gridColor} 1px, transparent 1px)`,
         backgroundSize: `${gridSize}px ${gridSize}px`,
         overflow: 'hidden',
         fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+        ...style,
       }}
     >
       {showScanLine && (

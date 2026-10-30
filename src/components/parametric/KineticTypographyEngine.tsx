@@ -1,28 +1,33 @@
 import React from 'react';
 import { interpolate, random, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface KineticTypographyEngineProps {
-  text: string;
+export interface KineticTypographyEngineProps extends BasePresetProps {
+  text?: string;
   mode?: 'scramble' | 'variable-morph' | 'mask-clip';
   fontSize?: number;
   color?: string;
   fontFamily?: string;
-  className?: string;
-  style?: React.CSSProperties;
 }
 
 const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
 
 export const KineticTypographyEngine: React.FC<KineticTypographyEngineProps> = ({
-  text,
+  frame: frameProp,
+  text = 'KINETIC_TYPO_ENGINE',
   mode = 'scramble',
   fontSize = 64,
-  color = '#FFFFFF',
+  color,
+  primaryColor = '#FFFFFF',
   fontFamily = "'JetBrains Mono', sans-serif",
+  className,
   style,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
+  const { fps = 60 } = useVideoConfig() || {};
+
+  const textColor = color || primaryColor;
 
   if (mode === 'scramble') {
     const textChars = text.split('');
@@ -45,9 +50,10 @@ export const KineticTypographyEngine: React.FC<KineticTypographyEngineProps> = (
 
     return (
       <div
+        className={className}
         style={{
           fontSize: `${fontSize}px`,
-          color,
+          color: textColor,
           fontFamily,
           fontWeight: 'bold',
           letterSpacing: '2px',
@@ -72,9 +78,10 @@ export const KineticTypographyEngine: React.FC<KineticTypographyEngineProps> = (
 
     return (
       <div
+        className={className}
         style={{
           fontSize: `${fontSize}px`,
-          color,
+          color: textColor,
           fontFamily,
           fontWeight: weightVal,
           letterSpacing: `${letterSpacingVal}px`,
@@ -102,6 +109,7 @@ export const KineticTypographyEngine: React.FC<KineticTypographyEngineProps> = (
 
   return (
     <div
+      className={className}
       style={{
         overflow: 'hidden',
         display: 'inline-block',
@@ -111,7 +119,7 @@ export const KineticTypographyEngine: React.FC<KineticTypographyEngineProps> = (
       <div
         style={{
           fontSize: `${fontSize}px`,
-          color,
+          color: textColor,
           fontFamily,
           fontWeight: 'bold',
           clipPath: `inset(0 ${100 - clipProgress}% 0 0)`,

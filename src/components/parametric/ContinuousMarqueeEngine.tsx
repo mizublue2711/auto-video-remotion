@@ -1,25 +1,29 @@
 import React from 'react';
 import { useCurrentFrame } from 'remotion';
+import { BasePresetProps } from '../../types/presets';
 
-export interface ContinuousMarqueeEngineProps {
-  children: React.ReactNode;
+export interface ContinuousMarqueeEngineProps extends BasePresetProps {
+  children?: React.ReactNode;
   speed?: number;
   itemWidth?: number;
-  style?: React.CSSProperties;
 }
 
 export const ContinuousMarqueeEngine: React.FC<ContinuousMarqueeEngineProps> = ({
+  frame: frameProp,
   children,
   speed = 4,
   itemWidth = 600,
+  className,
   style,
 }) => {
-  const frame = useCurrentFrame();
+  const hookFrame = useCurrentFrame();
+  const frame = frameProp ?? hookFrame;
 
   const translateX = (frame * speed) % itemWidth;
 
   return (
     <div
+      className={className}
       style={{
         overflow: 'hidden',
         width: '100%',
