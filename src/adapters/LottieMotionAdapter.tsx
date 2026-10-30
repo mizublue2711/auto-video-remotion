@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { Lottie, LottieHandle } from 'lottie-react';
+import * as LottieModule from 'lottie-react';
+import type { LottieHandle } from 'lottie-react';
 import { LottieAdapterProps } from '../types/adapters';
+
+const LottieComponent = ((LottieModule as any).default || (LottieModule as any).Lottie || LottieModule) as any;
 
 export const LottieMotionAdapter: React.FC<LottieAdapterProps> = ({
   animationData,
@@ -21,8 +24,6 @@ export const LottieMotionAdapter: React.FC<LottieAdapterProps> = ({
       }
     }
   }, [frame]);
-
-  const LottieComponent = Lottie as any;
 
   return (
     <LottieComponent
