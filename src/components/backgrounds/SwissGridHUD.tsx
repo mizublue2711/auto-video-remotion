@@ -6,6 +6,9 @@ export interface SwissGridHUDProps extends BasePresetProps {
   gridSize?: number;
   showScanLine?: boolean;
   showTelemetryCorners?: boolean;
+  accentColor?: string;
+  accentCyan?: string;
+  cycleText?: string;
 }
 
 export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
@@ -13,6 +16,9 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
   backgroundColor = '#050505',
   gridColor = '#1A1A24',
   primaryColor = '#00E5FF',
+  accentColor,
+  accentCyan,
+  cycleText,
   gridSize = 60,
   showScanLine = true,
   showTelemetryCorners = true,
@@ -21,6 +27,8 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
 }) => {
   const hookFrame = useCurrentFrame();
   const frame = frameProp ?? hookFrame;
+
+  const effectiveAccent = accentCyan || accentColor || primaryColor;
 
   const scanProgress = (frame % 120) / 120;
   const laserY = interpolate(scanProgress, [0, 1], [0, 1080]);
@@ -52,8 +60,8 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
               left: 0,
               right: 0,
               height: '2px',
-              background: `linear-gradient(90deg, transparent 0%, ${primaryColor} 20%, ${primaryColor} 80%, transparent 100%)`,
-              boxShadow: `0 0 15px ${primaryColor}, 0 0 30px ${primaryColor}`,
+              background: `linear-gradient(90deg, transparent 0%, ${effectiveAccent} 20%, ${effectiveAccent} 80%, transparent 100%)`,
+              boxShadow: `0 0 15px ${effectiveAccent}, 0 0 30px ${effectiveAccent}`,
               opacity: laserOpacity,
               zIndex: 2,
               pointerEvents: 'none',
@@ -66,7 +74,7 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
               left: 0,
               right: 0,
               height: '100px',
-              background: `linear-gradient(180deg, transparent 0%, ${primaryColor}18 100%)`,
+              background: `linear-gradient(180deg, transparent 0%, ${effectiveAccent}18 100%)`,
               pointerEvents: 'none',
               zIndex: 1,
             }}
@@ -82,7 +90,7 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
               position: 'absolute',
               top: '32px',
               left: '32px',
-              color: primaryColor,
+              color: effectiveAccent,
               fontSize: '12px',
               letterSpacing: '2px',
               opacity: 0.85,
@@ -99,7 +107,7 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
               position: 'absolute',
               top: '32px',
               right: '32px',
-              color: primaryColor,
+              color: effectiveAccent,
               fontSize: '12px',
               letterSpacing: '2px',
               opacity: 0.85,
@@ -118,7 +126,7 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
               position: 'absolute',
               bottom: '32px',
               left: '32px',
-              color: primaryColor,
+              color: effectiveAccent,
               fontSize: '12px',
               letterSpacing: '2px',
               opacity: 0.85,
@@ -135,7 +143,7 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
               position: 'absolute',
               bottom: '32px',
               right: '32px',
-              color: primaryColor,
+              color: effectiveAccent,
               fontSize: '12px',
               letterSpacing: '2px',
               opacity: 0.85,
@@ -143,7 +151,7 @@ export const SwissGridHUD: React.FC<SwissGridHUDProps> = ({
               textAlign: 'right',
             }}
           >
-            MATRIX_RESONANCE: 99.8% ┐
+            {cycleText || 'MATRIX_RESONANCE: 99.8%'} ┐
             <br />
             PARAMETRIC_ENGINE_V2 ┘
           </div>
