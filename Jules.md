@@ -70,3 +70,18 @@ Before submitting any Pull Request:
 1.  **Validate Configs:** Run `npm run validate:configs` and ensure all JSON files pass schema validation.
 2.  **TypeScript Check:** Run `npx tsc --noEmit` and ensure **ZERO (0) errors**.
 3.  **Open PR:** Submit PR against branch `main` with a clear summary of changes.
+
+
+--------------------------------------------------------------------------------
+
+#### 8. CROSS-PLATFORM PURE COMPONENT & REGISTRY RULES (REMOTION ↔ WEB AC)
+To ensure all visual assets are 100% portable to Website AC (Next.js / React DOM):
+1. **STRICT DECOUPLING FROM REMOTION HOOKS:**
+   * NEVER import `@remotion/player`, `@remotion/cli`, or Remotion context hooks directly inside components under `src/components/backgrounds/` or `src/components/parametric/`.
+   * Components MUST be Pure React/SVG/Canvas elements accepting optional `frame?: number` or `time?: number` via props.
+   * If `frame` is undefined (on Web DOM), components must fall back gracefully to CSS Animations (`@keyframes`) or CSS variables.
+2. **SINGLE SOURCE OF TYPES (`src/types/presets.ts`):**
+   * All background and motion presets MUST extend `BasePresetProps` from `src/types/presets.ts`.
+3. **CENTRAL REGISTRATION MANDATE (`src/presets/registry.ts`):**
+   * Every newly created background preset or parametric engine MUST be exported and registered in `ASSET_PRESET_REGISTRY` inside `src/presets/registry.ts` with metadata (`id`, `name`, `category`, `description`, `tags`, `component`, `defaultProps`).
+
