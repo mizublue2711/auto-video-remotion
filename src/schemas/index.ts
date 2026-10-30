@@ -16,6 +16,7 @@ export * from './websiteShowcase';
 export * from './datasetShowcase';
 export * from './logarithmicShellSchema';
 export * from './infiniteLoopSchema';
+export * from './universalMotionSchemaV2';
 
 export const RemotionConfigSchema = z.object({
   brand: brandSchema,
