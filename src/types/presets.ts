@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface BasePresetProps {
   frame?: number;
+  fps?: number;
   backgroundColor?: string;
   primaryColor?: string;
   secondaryColor?: string;
