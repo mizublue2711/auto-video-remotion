@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none">
+  <!-- Carat Economy Precision Faceted Gem Token -->
+  <g id="carat-gem">
+    <!-- Ambient Core Glow Behind Gem -->
+    <polygon points="38,26 82,26 103,52 60,96 17,52" fill="#00E5FF" opacity="0.25" filter="none" />
+
+    <!-- Facets -->
+    <g id="facets">
+      <!-- Top Center Crown Table Facet: Electric Cyan (#00E5FF) -->
+      <polygon points="38,26 82,26 60,52"
+               fill="#00E5FF" />
+
+      <!-- Top-Left Crown Bezel Facet: Sky Blue (#38BDF8) -->
+      <polygon points="38,26 17,52 38,52"
+               fill="#38BDF8" />
+
+      <!-- Top-Left Crown Kite Facet -->
+      <polygon points="38,26 38,52 60,52"
+               fill="#7DD3FC" />
+
+      <!-- Top-Right Crown Kite Facet -->
+      <polygon points="82,26 60,52 82,52"
+               fill="#00E5FF" />
+
+      <!-- Top-Right Crown Bezel Facet -->
+      <polygon points="82,26 82,52 103,52"
+               fill="#38BDF8" />
+
+      <!-- Lower Pavilion Facet 1 (Far Left): Sky Blue (#38BDF8) -->
+      <polygon points="17,52 38,52 60,96"
+               fill="#38BDF8" />
+
+      <!-- Lower Pavilion Facet 2 (Mid Left): Bright Sky Blue -->
+      <polygon points="38,52 60,52 60,96"
+               fill="#7DD3FC" />
+
+      <!-- Lower Pavilion Facet 3 (Mid Right): Deep Cerulean (#0284C7) -->
+      <polygon points="60,52 82,52 60,96"
+               fill="#0284C7" />
+
+      <!-- Lower Pavilion Facet 4 (Far Right): Deep Cerulean Shadow -->
+      <polygon points="82,52 103,52 60,96"
+               fill="#0369A1" />
+    </g>
+
+    <!-- Inner Facet Seams (Subtle White Precision Lines) -->
+    <g id="facet-lines" stroke="#FFFFFF" stroke-width="0.8" opacity="0.45" stroke-linejoin="round">
+      <line x1="38" y1="26" x2="60" y2="52" />
+      <line x1="82" y1="26" x2="60" y2="52" />
+      <line x1="38" y1="52" x2="60" y2="96" />
+      <line x1="60" y1="52" x2="60" y2="96" />
+      <line x1="82" y1="52" x2="60" y2="96" />
+      <line x1="17" y1="52" x2="103" y2="52" />
+    </g>
+
+    <!-- Rim Highlight: Crisp White Stroke (#FFFFFF, 1.5px) -->
+    <polygon points="38,26 82,26 103,52 60,96 17,52"
+             stroke="#FFFFFF"
+             stroke-width="1.5"
+             stroke-linejoin="round" />
+
+    <!-- Specular Ridge Sheen -->
+    <polyline points="17,52 38,26 82,26"
+              stroke="#FFFFFF"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              opacity="0.95" />
+
+    <!-- Primary Diamond Glint Star (Apex Corner) -->
+    <circle cx="38" cy="26" r="3" fill="#FFFFFF" />
+    <circle cx="82" cy="26" r="1.5" fill="#FFFFFF" opacity="0.9" />
+  </g>
+</svg>

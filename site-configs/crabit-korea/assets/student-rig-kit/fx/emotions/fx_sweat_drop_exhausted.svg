@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100" height="120" fill="none">
+  <!-- Desk Exhaustion Sweat Drop Token -->
+  <g id="sweat-drop" transform="translate(0, 0)">
+    <!-- Base Teardrop Body -->
+    <path d="M 50 14 C 47 23 20 64 20 86 C 20 102.5 33.4 114 50 114 C 66.6 114 80 102.5 80 86 C 80 64 53 23 50 14 Z"
+          fill="#7DD3FC"
+          stroke="#38BDF8"
+          stroke-width="2.5"
+          stroke-linejoin="round" />
+
+    <!-- Ambient Depth Shading (Bottom-Right Crescent) -->
+    <path d="M 50 114 C 66.6 114 80 102.5 80 86 C 80 72 73 54 66 42 C 73 57 76 74 74 86 C 71 99 61 110 50 114 Z"
+          fill="#38BDF8"
+          opacity="0.5" />
+
+    <!-- Soft Primary Highlight Reflection (Upper-Left Flank) -->
+    <path d="M 33 46 C 27 58 26 73 30 86 C 31 89.5 35 90 36 86.5 C 33.5 76 34.5 61 38.5 50 C 39.5 46.5 35 44 33 46 Z"
+          fill="#E0F2FE" />
+
+    <!-- Secondary Accent Glint (Lower Left) -->
+    <circle cx="38" cy="96" r="3.5" fill="#E0F2FE" />
+
+    <!-- Subtle Apex Gloss -->
+    <ellipse cx="49" cy="28" rx="2.5" ry="5.5" transform="rotate(-15 49 28)" fill="#E0F2FE" opacity="0.75" />
+  </g>
+</svg>

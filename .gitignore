@@ -3,6 +3,7 @@
 gcp-key.json
 REMOTION_GCP_PRIVATE_KEY
 .env
+.env*
 sa-permissions.json
 *.env
 

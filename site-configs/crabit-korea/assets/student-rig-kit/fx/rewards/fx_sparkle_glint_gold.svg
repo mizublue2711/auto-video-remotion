@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" fill="none">
+  <!-- Sleek 4-Corner Diamond Star Glint (Amber Gold) -->
+  <defs>
+    <!-- Soft Core Radial Gradient Falloff -->
+    <radialGradient id="gold-glint-falloff" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="25%" stop-color="#FEF08A" stop-opacity="1" />
+      <stop offset="60%" stop-color="#F59E0B" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0.25" />
+    </radialGradient>
+
+    <!-- Outer Corona Glow Falloff -->
+    <radialGradient id="gold-corona-falloff" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.4" />
+      <stop offset="60%" stop-color="#F59E0B" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <g id="sparkle-glint">
+    <!-- Ambient Corona Glow -->
+    <circle cx="40" cy="40" r="34" fill="url(#gold-corona-falloff)" />
+
+    <!-- 45-Degree Secondary Inner Glint -->
+    <path d="M 40 22 Q 40 38 58 40 Q 40 42 40 58 Q 40 42 22 40 Q 40 38 40 22 Z"
+          fill="#FDE68A"
+          opacity="0.8" />
+
+    <!-- Sleek 4-Point Primary Diamond Star -->
+    <path d="M 40 6 Q 40 36 74 40 Q 40 44 40 74 Q 40 44 6 40 Q 40 36 40 6 Z"
+          fill="url(#gold-glint-falloff)" />
+
+    <!-- Pure White Central Glint Bead -->
+    <circle cx="40" cy="40" r="3.5" fill="#FFFFFF" />
+  </g>
+</svg>

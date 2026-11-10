@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="200" height="80" fill="none">
+  <!-- Walking Student Heel Speed Wind Lines (Scene 4) -->
+  <g id="speed-wind-lines" fill="#CBD5E1" opacity="0.6">
+    <!-- Top Tapered Speed Swoosh (Length: ~124px) -->
+    <path d="M 155 20 C 155 22.2 153 23.5 148 23.5 L 60 21.5 C 45 21 32 20 32 20 C 32 20 45 19 60 18.5 L 148 16.5 C 153 16.5 155 17.8 155 20 Z" />
+
+    <!-- Center Tapered Speed Swoosh (Primary Dynamic Lead, Length: ~176px) -->
+    <path d="M 188 40 C 188 42.8 185 44.5 178 44.5 L 45 42 C 28 41 12 40 12 40 C 12 40 28 39 45 38 L 178 35.5 C 185 35.5 188 37.2 188 40 Z" />
+
+    <!-- Bottom Tapered Speed Swoosh (Length: ~124px) -->
+    <path d="M 165 60 C 165 62.2 163 63.5 156 63.5 L 70 61.5 C 55 61 42 60 42 60 C 42 60 55 59 70 58.5 L 156 56.5 C 163 56.5 165 57.8 165 60 Z" />
+
+    <!-- Secondary Micro Detached Kinetic Wisps -->
+    <path d="M 172 20 C 172 21.2 170.8 22 167 22 L 161 20.8 C 159 20.4 159 19.6 161 19.2 L 167 18 C 170.8 18 172 18.8 172 20 Z" opacity="0.8" />
+    <path d="M 28 40 C 28 40.8 26 41.2 22 41.2 L 16 40.5 C 14 40.3 14 39.7 16 39.5 L 22 38.8 C 26 38.8 28 39.2 28 40 Z" opacity="0.7" />
+    <path d="M 180 60 C 180 61.2 178.5 62 174 62 L 170 60.8 C 168 60.4 168 59.6 170 59.2 L 174 58 C 178.5 58 180 58.8 180 60 Z" opacity="0.8" />
+  </g>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" width="100" height="140" fill="none">
+  <!-- Confused Reaction Question Mark Token -->
+  <g id="question-mark">
+    <!-- Drop Shadow Layer -->
+    <g id="drop-shadow" transform="translate(4, 5)" opacity="0.95">
+      <!-- Hook Shadow -->
+      <path d="M 26 42 C 26 23 39 12 56 12 C 73 12 84 23 84 39 C 84 53 74 63 65 71 C 59 76 57 81 57 88 L 43 88 C 43 78 47 70 54 62 C 61 56 68 49 68 39 C 68 30 63 24 56 24 C 47 24 41 31 40 42 Z"
+            fill="#7F1D1D" />
+      <!-- Dot Shadow -->
+      <circle cx="50" cy="116" r="10" fill="#7F1D1D" />
+    </g>
+
+    <!-- Main Character Body with Dark Outline -->
+    <g id="main-glyph">
+      <!-- Question Hook -->
+      <path d="M 26 42 C 26 23 39 12 56 12 C 73 12 84 23 84 39 C 84 53 74 63 65 71 C 59 76 57 81 57 88 L 43 88 C 43 78 47 70 54 62 C 61 56 68 49 68 39 C 68 30 63 24 56 24 C 47 24 41 31 40 42 Z"
+            fill="#EF4444"
+            stroke="#991B1B"
+            stroke-width="4.5"
+            stroke-linejoin="round"
+            stroke-linecap="round" />
+
+      <!-- Question Dot -->
+      <circle cx="50" cy="116" r="10"
+              fill="#EF4444"
+              stroke="#991B1B"
+              stroke-width="4.5" />
+    </g>
+
+    <!-- High-Impact Comic Highlights -->
+    <g id="highlights">
+      <!-- Hook Arch Highlight -->
+      <path d="M 36 30 C 41 21 49 17 58 17 C 67 17 73 21 76 26 C 73 22 66 19 57 19 C 48 19 40 23 36 30 Z"
+            fill="#FFFFFF"
+            opacity="0.85" />
+      <path d="M 29 42 C 29 35 32 29 36 24 C 34 28 32 34 32 41 C 32 43 30 44 29 42 Z"
+            fill="#FFFFFF"
+            opacity="0.8" />
+
+      <!-- Dot Reflection Sparkle -->
+      <circle cx="47" cy="113" r="3" fill="#FFFFFF" opacity="0.9" />
+    </g>
+  </g>
+</svg>

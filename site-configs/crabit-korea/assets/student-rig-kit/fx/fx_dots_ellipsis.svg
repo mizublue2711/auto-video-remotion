@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60" width="160" height="60" fill="none">
+  <!-- Awkward Silence Bouncing Ellipsis Token -->
+  <g id="ellipsis-group">
+    <!-- Ground Projection Bounce Shadows -->
+    <g id="ground-shadows">
+      <ellipse cx="36" cy="48" rx="10.5" ry="3.5" fill="#64748B" opacity="0.32" />
+      <ellipse cx="80" cy="48" rx="8" ry="2.5" fill="#64748B" opacity="0.18" />
+      <ellipse cx="124" cy="48" rx="9.5" ry="3.2" fill="#64748B" opacity="0.28" />
+    </g>
+
+    <!-- Dot 1 (Left: Ground Anchor) -->
+    <g id="dot-1">
+      <circle cx="36" cy="32" r="11" fill="#64748B" />
+      <!-- Soft Top Specular Rim -->
+      <path d="M 29 27 C 31 23 35 22 39 22 C 41 22 43 23 44 24 C 42 23.5 39 23.5 36 24.5 C 32 25.8 30 28 29 30 Z"
+            fill="#CBD5E1"
+            opacity="0.7" />
+      <!-- Micro Glint -->
+      <circle cx="33" cy="27" r="2" fill="#F8FAFC" opacity="0.8" />
+    </g>
+
+    <!-- Dot 2 (Center: Apex Bounce) -->
+    <g id="dot-2">
+      <circle cx="80" cy="22" r="11" fill="#64748B" />
+      <!-- Soft Top Specular Rim -->
+      <path d="M 73 17 C 75 13 79 12 83 12 C 85 12 87 13 88 14 C 86 13.5 83 13.5 80 14.5 C 76 15.8 74 18 73 20 Z"
+            fill="#CBD5E1"
+            opacity="0.7" />
+      <!-- Micro Glint -->
+      <circle cx="77" cy="17" r="2" fill="#F8FAFC" opacity="0.8" />
+    </g>
+
+    <!-- Dot 3 (Right: Mid Flight) -->
+    <g id="dot-3">
+      <circle cx="124" cy="28" r="11" fill="#64748B" />
+      <!-- Soft Top Specular Rim -->
+      <path d="M 117 23 C 119 19 123 18 127 18 C 129 18 131 19 132 20 C 130 19.5 127 19.5 124 20.5 C 120 21.8 118 24 117 26 Z"
+            fill="#CBD5E1"
+            opacity="0.7" />
+      <!-- Micro Glint -->
+      <circle cx="121" cy="23" r="2" fill="#F8FAFC" opacity="0.8" />
+    </g>
+  </g>
+</svg>

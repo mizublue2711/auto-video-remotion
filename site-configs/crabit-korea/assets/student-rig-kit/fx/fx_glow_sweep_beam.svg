@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100" fill="none">
+  <!-- Crabit Card Balance Update (+50,000 KRW) Glow Sweep Beam -->
+  <defs>
+    <!-- Wide Feathered Cyan/White Linear Beam Gradient -->
+    <linearGradient id="glow-beam-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0" />
+      <stop offset="20%" stop-color="#00E5FF" stop-opacity="0.25" />
+      <stop offset="40%" stop-color="#00E5FF" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="1" />
+      <stop offset="60%" stop-color="#00E5FF" stop-opacity="0.8" />
+      <stop offset="80%" stop-color="#00E5FF" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Secondary Soft Ambient Gradient -->
+    <linearGradient id="ambient-flare-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0" />
+      <stop offset="50%" stop-color="#00E5FF" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Angled at -20° around center (200, 50) -->
+  <g id="sweep-beam-group" transform="rotate(-20 200 50)">
+    <!-- Soft Ambient Halo Flare -->
+    <rect x="70" y="-50" width="260" height="200" fill="url(#ambient-flare-gradient)" />
+
+    <!-- Main Feathered Beam Strip -->
+    <rect x="110" y="-50" width="180" height="200" fill="url(#glow-beam-gradient)" />
+
+    <!-- Focused High-Intensity Cyan Core Ribbon -->
+    <rect x="188" y="-50" width="24" height="200" fill="#00E5FF" opacity="0.65" />
+
+    <!-- Razor Pure White Specular Centerline (#FFFFFF) -->
+    <rect x="198" y="-50" width="4" height="200" rx="2" fill="#FFFFFF" opacity="0.95" />
+  </g>
+</svg>

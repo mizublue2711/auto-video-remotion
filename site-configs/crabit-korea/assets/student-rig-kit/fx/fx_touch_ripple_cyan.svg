@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" fill="none">
+  <!-- Index Finger Tap Cyan Touch Ripple Token -->
+  <g id="touch-ripple">
+    <!-- Center Contact Anchor Glow & Core -->
+    <circle cx="100" cy="100" r="22" fill="#00E5FF" opacity="0.15" />
+    <circle cx="100" cy="100" r="8" fill="#00E5FF" opacity="0.9" />
+    <circle cx="100" cy="100" r="3.5" fill="#FFFFFF" />
+
+    <!-- Sub-Harmonic Dash Accents -->
+    <circle cx="100" cy="100" r="64"
+            fill="none"
+            stroke="#00E5FF"
+            stroke-width="1.5"
+            stroke-dasharray="6,8"
+            opacity="0.3" />
+
+    <!-- Dual Concentric Shockwave Rings -->
+    <!-- Inner Concentric Ring: stroke="#00E5FF", stroke-width="4", opacity="0.8" -->
+    <circle cx="100" cy="100" r="46"
+            fill="none"
+            stroke="#00E5FF"
+            stroke-width="4"
+            opacity="0.8" />
+
+    <!-- Outer Concentric Ring: stroke="#00E5FF", stroke-width="4", opacity="0.4" -->
+    <circle cx="100" cy="100" r="82"
+            fill="none"
+            stroke="#00E5FF"
+            stroke-width="4"
+            opacity="0.4" />
+  </g>
+</svg>
