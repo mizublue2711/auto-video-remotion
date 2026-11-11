@@ -12,6 +12,9 @@ export * from './ui/BentoGrid3D';
 export * from './ui/MarqueeTicker';
 export * from './ui/KineticTypography';
 
+// Props & Screen UIs
+export * from './props/PropPhoneScreenUI';
+
 // Backgrounds & HUD
 export * from './backgrounds/SwissGridHUD';
 export * from './backgrounds/CyberpunkMatrixBg';

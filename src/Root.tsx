@@ -16,6 +16,7 @@ import infiniteLoopConfig from '../site-configs/infinite-loop-v1.json';
 
 import { websiteShowcaseSchema } from './schemas/websiteShowcase';
 import { RemotionConfigSchema } from './schemas/index';
+import { PropPhoneScreenUI } from './components/props/PropPhoneScreenUI';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -74,6 +75,21 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={InfiniteLoopSchema.parse(infiniteLoopConfig)}
+      />
+
+      {/* Prop Phone Screen UI - Fintech mobile viewport for chroma compositing */}
+      <Composition
+        id="PropPhoneScreenUI"
+        component={PropPhoneScreenUI}
+        durationInFrames={180}
+        fps={60}
+        width={400}
+        height={860}
+        defaultProps={{
+          balance: 125000,
+          userName: 'Kim Min-jun',
+          solveStreak: 7,
+        }}
       />
     </>
   );
