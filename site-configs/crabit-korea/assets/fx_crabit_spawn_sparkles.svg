@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 250" width="350" height="250" fill="none">
+  <!-- LAYER 1: PRISMATIC AURA RING (Elliptical Ground Polygon around Pivot 175, 200) -->
+  <g id="fx-prismatic-aura-ring">
+    <polygon points="285,200 277,210 253,218 217,224 175,226 133,224 97,218 73,210 65,200 73,190 97,182 133,176 175,174 217,176 253,182 277,190"
+             fill="none" stroke="#00E5FF" stroke-width="2" opacity="0.8"/>
+    <polygon points="255,200 248,208 230,214 204,218 175,220 146,218 120,214 102,208 95,200 102,192 120,186 146,182 175,180 204,182 230,186 248,192"
+             fill="none" stroke="#C084FC" stroke-width="1.2" opacity="0.6"/>
+  </g>
+
+  <!-- LAYER 2: 8 MINI CIRCULAR ENERGY BUBBLES -->
+  <g id="fx-energy-bubbles">
+    <circle cx="115" cy="190" r="4" fill="#00E5FF" opacity="0.85"/>
+    <circle cx="138" cy="204" r="6" fill="#C084FC" opacity="0.9"/>
+    <circle cx="160" cy="186" r="3.5" fill="#FFFFFF" opacity="0.95"/>
+    <circle cx="175" cy="208" r="7" fill="#00E5FF" opacity="0.8"/>
+    <circle cx="195" cy="188" r="5" fill="#C084FC" opacity="0.85"/>
+    <circle cx="215" cy="204" r="6" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="235" cy="192" r="3" fill="#00E5FF" opacity="0.85"/>
+    <circle cx="255" cy="198" r="5" fill="#C084FC" opacity="0.9"/>
+  </g>
+
+  <!-- LAYER 3: CLAW FLARES (Sharp Diamond Light Beams at (80, 70) and (270, 70)) -->
+  <g id="fx-claw-flares">
+    <!-- Left Claw Flare (x: 80, y: 70) -->
+    <g id="fx-left-claw-flare" transform="translate(80, 70)">
+      <path d="M 0,-24 Q 0,0 24,0 Q 0,0 0,24 Q 0,0 -24,0 Q 0,0 0,-24 Z" fill="#00E5FF" opacity="0.85"/>
+      <path d="M 0,-14 Q 0,0 14,0 Q 0,0 0,14 Q 0,0 -14,0 Q 0,0 0,-14 Z" fill="#FFFFFF"/>
+      <polygon points="0,-8 8,0 0,8 -8,0" transform="rotate(45)" fill="#FFFFFF" opacity="0.9"/>
+      <circle cx="0" cy="0" r="2.5" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Right Claw Flare (x: 270, y: 70) -->
+    <g id="fx-right-claw-flare" transform="translate(270, 70)">
+      <path d="M 0,-24 Q 0,0 24,0 Q 0,0 0,24 Q 0,0 -24,0 Q 0,0 0,-24 Z" fill="#00E5FF" opacity="0.85"/>
+      <path d="M 0,-14 Q 0,0 14,0 Q 0,0 0,14 Q 0,0 -14,0 Q 0,0 0,-14 Z" fill="#FFFFFF"/>
+      <polygon points="0,-8 8,0 0,8 -8,0" transform="rotate(45)" fill="#FFFFFF" opacity="0.9"/>
+      <circle cx="0" cy="0" r="2.5" fill="#FFFFFF"/>
+    </g>
+  </g>
+</svg>

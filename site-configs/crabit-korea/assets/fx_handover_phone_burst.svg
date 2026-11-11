@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" fill="none">
+  <!-- LAYER 1: SHOCKWAVE RING -->
+  <g id="fx-shockwave-ring">
+    <circle cx="200" cy="200" r="120" fill="none" stroke="#00E5FF" stroke-width="4"/>
+  </g>
+
+  <!-- LAYER 2: 6 RADIAL CARAT DIAMONDS (0°, 60°, 120°, 180°, 240°, 300°) -->
+  <g id="fx-radial-carat-diamonds">
+    <!-- Gem 0: 0° (North) - Cyan Gem #00E5FF -->
+    <g transform="translate(200, 200) rotate(0) translate(0, -90)">
+      <polygon points="-7,-11 7,-11 0,-2" fill="#00E5FF"/>
+      <polygon points="-7,-11 -13,-2 -7,-2" fill="#38BDF8"/>
+      <polygon points="-7,-11 -7,-2 0,-2" fill="#7DD3FC"/>
+      <polygon points="7,-11 0,-2 7,-2" fill="#00E5FF"/>
+      <polygon points="7,-11 7,-2 13,-2" fill="#38BDF8"/>
+      <polygon points="-13,-2 -7,-2 0,12" fill="#38BDF8"/>
+      <polygon points="-7,-2 0,-2 0,12" fill="#7DD3FC"/>
+      <polygon points="0,-2 7,-2 0,12" fill="#0284C7"/>
+      <polygon points="7,-2 13,-2 0,12" fill="#0369A1"/>
+      <polygon points="-7,-11 7,-11 13,-2 0,12 -13,-2" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="-7" cy="-11" r="1.5" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Gem 1: 60° (North-East) - Pure Ice White #FFFFFF -->
+    <g transform="translate(200, 200) rotate(60) translate(0, -90)">
+      <polygon points="-7,-11 7,-11 0,-2" fill="#FFFFFF"/>
+      <polygon points="-7,-11 -13,-2 -7,-2" fill="#E2E8F0"/>
+      <polygon points="-7,-11 -7,-2 0,-2" fill="#F1F5F9"/>
+      <polygon points="7,-11 0,-2 7,-2" fill="#FFFFFF"/>
+      <polygon points="7,-11 7,-2 13,-2" fill="#E2E8F0"/>
+      <polygon points="-13,-2 -7,-2 0,12" fill="#CBD5E1"/>
+      <polygon points="-7,-2 0,-2 0,12" fill="#E2E8F0"/>
+      <polygon points="0,-2 7,-2 0,12" fill="#94A3B8"/>
+      <polygon points="7,-2 13,-2 0,12" fill="#64748B"/>
+      <polygon points="-7,-11 7,-11 13,-2 0,12 -13,-2" stroke="#00E5FF" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="-7" cy="-11" r="1.5" fill="#00E5FF"/>
+    </g>
+
+    <!-- Gem 2: 120° (South-East) - Cyan Gem #00E5FF -->
+    <g transform="translate(200, 200) rotate(120) translate(0, -90)">
+      <polygon points="-7,-11 7,-11 0,-2" fill="#00E5FF"/>
+      <polygon points="-7,-11 -13,-2 -7,-2" fill="#38BDF8"/>
+      <polygon points="-7,-11 -7,-2 0,-2" fill="#7DD3FC"/>
+      <polygon points="7,-11 0,-2 7,-2" fill="#00E5FF"/>
+      <polygon points="7,-11 7,-2 13,-2" fill="#38BDF8"/>
+      <polygon points="-13,-2 -7,-2 0,12" fill="#38BDF8"/>
+      <polygon points="-7,-2 0,-2 0,12" fill="#7DD3FC"/>
+      <polygon points="0,-2 7,-2 0,12" fill="#0284C7"/>
+      <polygon points="7,-2 13,-2 0,12" fill="#0369A1"/>
+      <polygon points="-7,-11 7,-11 13,-2 0,12 -13,-2" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="-7" cy="-11" r="1.5" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Gem 3: 180° (South) - Pure Ice White #FFFFFF -->
+    <g transform="translate(200, 200) rotate(180) translate(0, -90)">
+      <polygon points="-7,-11 7,-11 0,-2" fill="#FFFFFF"/>
+      <polygon points="-7,-11 -13,-2 -7,-2" fill="#E2E8F0"/>
+      <polygon points="-7,-11 -7,-2 0,-2" fill="#F1F5F9"/>
+      <polygon points="7,-11 0,-2 7,-2" fill="#FFFFFF"/>
+      <polygon points="7,-11 7,-2 13,-2" fill="#E2E8F0"/>
+      <polygon points="-13,-2 -7,-2 0,12" fill="#CBD5E1"/>
+      <polygon points="-7,-2 0,-2 0,12" fill="#E2E8F0"/>
+      <polygon points="0,-2 7,-2 0,12" fill="#94A3B8"/>
+      <polygon points="7,-2 13,-2 0,12" fill="#64748B"/>
+      <polygon points="-7,-11 7,-11 13,-2 0,12 -13,-2" stroke="#00E5FF" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="-7" cy="-11" r="1.5" fill="#00E5FF"/>
+    </g>
+
+    <!-- Gem 4: 240° (South-West) - Cyan Gem #00E5FF -->
+    <g transform="translate(200, 200) rotate(240) translate(0, -90)">
+      <polygon points="-7,-11 7,-11 0,-2" fill="#00E5FF"/>
+      <polygon points="-7,-11 -13,-2 -7,-2" fill="#38BDF8"/>
+      <polygon points="-7,-11 -7,-2 0,-2" fill="#7DD3FC"/>
+      <polygon points="7,-11 0,-2 7,-2" fill="#00E5FF"/>
+      <polygon points="7,-11 7,-2 13,-2" fill="#38BDF8"/>
+      <polygon points="-13,-2 -7,-2 0,12" fill="#38BDF8"/>
+      <polygon points="-7,-2 0,-2 0,12" fill="#7DD3FC"/>
+      <polygon points="0,-2 7,-2 0,12" fill="#0284C7"/>
+      <polygon points="7,-2 13,-2 0,12" fill="#0369A1"/>
+      <polygon points="-7,-11 7,-11 13,-2 0,12 -13,-2" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="-7" cy="-11" r="1.5" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Gem 5: 300° (North-West) - Pure Ice White #FFFFFF -->
+    <g transform="translate(200, 200) rotate(300) translate(0, -90)">
+      <polygon points="-7,-11 7,-11 0,-2" fill="#FFFFFF"/>
+      <polygon points="-7,-11 -13,-2 -7,-2" fill="#E2E8F0"/>
+      <polygon points="-7,-11 -7,-2 0,-2" fill="#F1F5F9"/>
+      <polygon points="7,-11 0,-2 7,-2" fill="#FFFFFF"/>
+      <polygon points="7,-11 7,-2 13,-2" fill="#E2E8F0"/>
+      <polygon points="-13,-2 -7,-2 0,12" fill="#CBD5E1"/>
+      <polygon points="-7,-2 0,-2 0,12" fill="#E2E8F0"/>
+      <polygon points="0,-2 7,-2 0,12" fill="#94A3B8"/>
+      <polygon points="7,-2 13,-2 0,12" fill="#64748B"/>
+      <polygon points="-7,-11 7,-11 13,-2 0,12 -13,-2" stroke="#00E5FF" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="-7" cy="-11" r="1.5" fill="#00E5FF"/>
+    </g>
+  </g>
+
+  <!-- LAYER 3: 3 SPARKLE STARS -->
+  <g id="fx-sparkle-stars">
+    <g transform="translate(200, 200) rotate(30) translate(0, -130)">
+      <path d="M 0,-15 Q 0,0 15,0 Q 0,0 0,15 Q 0,0 -15,0 Q 0,0 0,-15 Z" fill="#FFFFFF"/>
+      <circle cx="0" cy="0" r="2.5" fill="#00E5FF"/>
+    </g>
+    <g transform="translate(200, 200) rotate(150) translate(0, -120)">
+      <path d="M 0,-15 Q 0,0 15,0 Q 0,0 0,15 Q 0,0 -15,0 Q 0,0 0,-15 Z" fill="#FFFFFF"/>
+      <circle cx="0" cy="0" r="2.5" fill="#00E5FF"/>
+    </g>
+    <g transform="translate(200, 200) rotate(270) translate(0, -135)">
+      <path d="M 0,-15 Q 0,0 15,0 Q 0,0 0,15 Q 0,0 -15,0 Q 0,0 0,-15 Z" fill="#FFFFFF"/>
+      <circle cx="0" cy="0" r="2.5" fill="#00E5FF"/>
+    </g>
+  </g>
+</svg>

@@ -15,6 +15,9 @@ export * from './ui/KineticTypography';
 // Props & Screen UIs
 export * from './props/PropPhoneScreenUI';
 
+// Micro-FX Mechanics (Class B: Inorganic / Parametric Animation)
+export * from './fx';
+
 // Backgrounds & HUD
 export * from './backgrounds/SwissGridHUD';
 export * from './backgrounds/CyberpunkMatrixBg';

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" fill="none">
+  <!-- LAYER 1: IDEA CORE (Anime ! Exclamation merged with Diamond Facet) -->
+  <g id="fx-idea-core">
+    <!-- Upper Diamond Facet -->
+    <polygon points="100,45 112,75 100,120 88,75" fill="#F59E0B"/>
+    <!-- Pure White Highlight Core -->
+    <polygon points="100,55 106,75 100,105 94,75" fill="#FFFFFF"/>
+    <!-- Lower Dot -->
+    <circle cx="100" cy="138" r="6" fill="#F59E0B"/>
+    <circle cx="100" cy="138" r="2.5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- LAYER 2: ACTION BURST LINES (4 Accent Lines Projecting Outward) -->
+  <g id="fx-action-burst-lines">
+    <!-- Top-Left Accent Line -->
+    <line x1="75" y1="55" x2="50" y2="30" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+    <!-- Top-Right Accent Line -->
+    <line x1="125" y1="55" x2="150" y2="30" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+    <!-- Mid-Left Accent Line -->
+    <line x1="65" y1="90" x2="35" y2="90" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+    <!-- Mid-Right Accent Line -->
+    <line x1="135" y1="90" x2="165" y2="90" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

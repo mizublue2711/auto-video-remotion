@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500" fill="none">
+  <!-- LAYER 1: CONFETTI RIBBONS (10 Micro-confetti strips 6x16px, Alternating #2563EB & #F59E0B) -->
+  <g id="fx-confetti-ribbons">
+    <g transform="translate(356, 290) rotate(42)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#2563EB"/>
+    </g>
+    <g transform="translate(325, 365) rotate(-35)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#F59E0B"/>
+    </g>
+    <g transform="translate(242, 385) rotate(70)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#2563EB"/>
+    </g>
+    <g transform="translate(138, 342) rotate(18)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#F59E0B"/>
+    </g>
+    <g transform="translate(110, 245) rotate(-52)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#2563EB"/>
+    </g>
+    <g transform="translate(125, 142) rotate(64)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#F59E0B"/>
+    </g>
+    <g transform="translate(235, 115) rotate(-22)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#2563EB"/>
+    </g>
+    <g transform="translate(340, 120) rotate(50)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#F59E0B"/>
+    </g>
+    <g transform="translate(385, 195) rotate(-62)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#2563EB"/>
+    </g>
+    <g transform="translate(395, 260) rotate(26)">
+      <rect x="-3" y="-8" width="6" height="16" rx="1" fill="#F59E0B"/>
+    </g>
+  </g>
+
+  <!-- LAYER 2: 8 CARAT COINS (Circular Gold Token Coins with Embossed Hex Facets) -->
+  <g id="fx-carat-coins">
+    <!-- Coin 0: 0° (East: translate(360, 250)) -->
+    <g transform="translate(360, 250)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Coin 1: 45° (South-East: translate(328, 328)) -->
+    <g transform="translate(328, 328)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Coin 2: 90° (South: translate(250, 360)) -->
+    <g transform="translate(250, 360)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Coin 3: 135° (South-West: translate(172, 328)) -->
+    <g transform="translate(172, 328)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Coin 4: 180° (West: translate(140, 250)) -->
+    <g transform="translate(140, 250)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Coin 5: 225° (North-West: translate(172, 172)) -->
+    <g transform="translate(172, 172)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Coin 6: 270° (North: translate(250, 140)) -->
+    <g transform="translate(250, 140)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Coin 7: 315° (North-East: translate(328, 172)) -->
+    <g transform="translate(328, 172)">
+      <circle r="14" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <circle r="10" fill="#FBBF24"/>
+      <polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.6"/>
+      <polygon points="0,-6 5,0 0,6 -5,0" fill="#B45309"/>
+      <circle cx="-4" cy="-4" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+  </g>
+
+  <!-- LAYER 3: GLINT PARTICLES (Tiny 4-point gold star glints #FBBF24) -->
+  <g id="fx-glint-particles">
+    <g transform="translate(290, 190) scale(1.1)">
+      <path d="M 0,-8 Q 0,0 8,0 Q 0,0 0,8 Q 0,0 -8,0 Q 0,0 0,-8 Z" fill="#FBBF24"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(365, 305) scale(0.9)">
+      <path d="M 0,-8 Q 0,0 8,0 Q 0,0 0,8 Q 0,0 -8,0 Q 0,0 0,-8 Z" fill="#FBBF24"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(195, 360) scale(1.2)">
+      <path d="M 0,-8 Q 0,0 8,0 Q 0,0 0,8 Q 0,0 -8,0 Q 0,0 0,-8 Z" fill="#FBBF24"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(130, 220) scale(0.95)">
+      <path d="M 0,-8 Q 0,0 8,0 Q 0,0 0,8 Q 0,0 -8,0 Q 0,0 0,-8 Z" fill="#FBBF24"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(210, 135) scale(1.05)">
+      <path d="M 0,-8 Q 0,0 8,0 Q 0,0 0,8 Q 0,0 -8,0 Q 0,0 0,-8 Z" fill="#FBBF24"/>
+      <circle cx="0" cy="0" r="1.5" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(250, 250) scale(1.3)">
+      <path d="M 0,-8 Q 0,0 8,0 Q 0,0 0,8 Q 0,0 -8,0 Q 0,0 0,-8 Z" fill="#FBBF24"/>
+      <circle cx="0" cy="0" r="1.8" fill="#FFFFFF"/>
+    </g>
+  </g>
+</svg>
