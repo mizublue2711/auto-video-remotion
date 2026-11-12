@@ -2,6 +2,7 @@ import React from 'react';
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
 
 export interface FxStudy_IdeaPopProps {
+  startFrame?: number;
   frameOffset?: number;
   scale?: number;
   x?: number;
@@ -10,6 +11,7 @@ export interface FxStudy_IdeaPopProps {
 }
 
 export const FxStudy_IdeaPop: React.FC<FxStudy_IdeaPopProps> = ({
+  startFrame,
   frameOffset = 0,
   scale = 1,
   x = 0,
@@ -19,7 +21,8 @@ export const FxStudy_IdeaPop: React.FC<FxStudy_IdeaPopProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const relFrame = frame - frameOffset;
+  const offset = startFrame ?? frameOffset;
+  const relFrame = frame - offset;
   if (relFrame < 0 || relFrame > 45) {
     return null;
   }

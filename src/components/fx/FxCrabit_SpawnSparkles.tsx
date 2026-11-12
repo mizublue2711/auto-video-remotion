@@ -2,6 +2,7 @@ import React from 'react';
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
 
 export interface FxCrabit_SpawnSparklesProps {
+  startFrame?: number;
   frameOffset?: number;
   scale?: number;
   x?: number;
@@ -29,6 +30,7 @@ const BUBBLES: BubbleData[] = [
 ];
 
 export const FxCrabit_SpawnSparkles: React.FC<FxCrabit_SpawnSparklesProps> = ({
+  startFrame,
   frameOffset = 0,
   scale = 1,
   x = 0,
@@ -39,7 +41,8 @@ export const FxCrabit_SpawnSparkles: React.FC<FxCrabit_SpawnSparklesProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const relFrame = frame - frameOffset;
+  const offset = startFrame ?? frameOffset;
+  const relFrame = frame - offset;
   if (!loop && (relFrame < 0 || relFrame > 40)) {
     return null;
   }

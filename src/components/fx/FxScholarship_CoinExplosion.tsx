@@ -2,6 +2,7 @@ import React from 'react';
 import { useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 
 export interface FxScholarship_CoinExplosionProps {
+  startFrame?: number;
   frameOffset?: number;
   scale?: number;
   x?: number;
@@ -40,6 +41,7 @@ const GLINT_POSITIONS = [
 ];
 
 export const FxScholarship_CoinExplosion: React.FC<FxScholarship_CoinExplosionProps> = ({
+  startFrame,
   frameOffset = 0,
   scale = 1,
   x = 0,
@@ -49,7 +51,8 @@ export const FxScholarship_CoinExplosion: React.FC<FxScholarship_CoinExplosionPr
   const frame = useCurrentFrame();
   useVideoConfig();
 
-  const relFrame = frame - frameOffset;
+  const offset = startFrame ?? frameOffset;
+  const relFrame = frame - offset;
   if (relFrame < 0 || relFrame > 55) {
     return null;
   }
@@ -210,3 +213,7 @@ export const FxScholarship_CoinExplosion: React.FC<FxScholarship_CoinExplosionPr
     </div>
   );
 };
+
+export const FxScholarshipCoinExplosion = FxScholarship_CoinExplosion;
+export type FxScholarshipCoinExplosionProps = FxScholarship_CoinExplosionProps;
+

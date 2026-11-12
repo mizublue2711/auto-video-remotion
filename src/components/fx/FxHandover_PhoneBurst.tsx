@@ -2,6 +2,7 @@ import React from 'react';
 import { useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion';
 
 export interface FxHandover_PhoneBurstProps {
+  startFrame?: number;
   frameOffset?: number;
   scale?: number;
   x?: number;
@@ -10,6 +11,7 @@ export interface FxHandover_PhoneBurstProps {
 }
 
 export const FxHandover_PhoneBurst: React.FC<FxHandover_PhoneBurstProps> = ({
+  startFrame,
   frameOffset = 0,
   scale = 1,
   x = 0,
@@ -19,7 +21,8 @@ export const FxHandover_PhoneBurst: React.FC<FxHandover_PhoneBurstProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const relFrame = frame - frameOffset;
+  const offset = startFrame ?? frameOffset;
+  const relFrame = frame - offset;
   if (relFrame < 0 || relFrame > 25) {
     return null;
   }
