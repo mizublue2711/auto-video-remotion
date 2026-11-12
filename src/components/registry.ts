@@ -13,6 +13,9 @@ export { GearSmartCalculator } from './study-gear/GearSmartCalculator';
 export { GearTimer3D } from './study-gear/GearTimer3D';
 export { GearTablet3D } from './study-gear/GearTablet3D';
 export { GearPlanner3D } from './study-gear/GearPlanner3D';
+export { GearStylusPen } from './study-gear/GearStylusPen';
+export { GearMagnifyingGlass } from './study-gear/GearMagnifyingGlass';
+export { GearCompassGeometry } from './study-gear/GearCompassGeometry';
 
 // 2. K-Fintech Cards & Vouchers (Thẻ ngân hàng & Vé thưởng)
 export { CouponTicketCard } from './ui/CouponTicketCard';
@@ -41,6 +44,9 @@ export const ASSET_CATALOG = {
     timer: { name: 'GearTimer3D', tag: 'Study', desc: 'Đồng hồ đếm ngược Pomodoro 3D' },
     tablet: { name: 'GearTablet3D', tag: 'Study', desc: 'Máy tính bảng học tập màn hình kính' },
     planner: { name: 'GearPlanner3D', tag: 'Study', desc: 'Sổ kế hoạch học tập Study Planner 3D' },
+    stylus: { name: 'GearStylusPen', tag: 'Study', desc: 'Bút stylus thông minh nghiêng 45° phát sáng' },
+    magnifyingGlass: { name: 'GearMagnifyingGlass', tag: 'Study', desc: 'Kính lúp kính mờ soi bài 30° viền kim loại' },
+    compass: { name: 'GearCompassGeometry', tag: 'Study', desc: 'Compa vẽ kỹ thuật micro-3D mạ chrome khớp chữ V 38°' },
   },
   ui: {
     couponCard: { name: 'CouponTicketCard', tag: 'Voucher', desc: 'Vé thưởng xé nẹp đục lỗ chuẩn K-Fintech' },
