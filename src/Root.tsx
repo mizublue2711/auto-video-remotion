@@ -14,6 +14,10 @@ import { InfiniteContinuousLoopScene } from './scenes/InfiniteContinuousLoopScen
 import { InfiniteLoopSchema } from './schemas/infiniteLoopSchema';
 import infiniteLoopConfig from '../site-configs/infinite-loop-v1.json';
 
+import { StudyGearConvergenceScene } from './scenes/StudyGearConvergenceScene';
+import { StudyGearConvergenceSchema } from './schemas/studyGearConvergenceSchema';
+import studyGearConvergenceConfig from '../site-configs/study-gear-convergence.json';
+
 import { websiteShowcaseSchema } from './schemas/websiteShowcase';
 import { RemotionConfigSchema } from './schemas/index';
 import { PropPhoneScreenUI } from './components/props/PropPhoneScreenUI';
@@ -75,6 +79,18 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={InfiniteLoopSchema.parse(infiniteLoopConfig)}
+      />
+
+      {/* Scene 2.5: Study Gear Convergence (Burst -> Arc Swap -> Vortex Suction) */}
+      <Composition
+        id="StudyGearConvergence-Scene2.5"
+        component={StudyGearConvergenceScene as React.FC<any>}
+        schema={StudyGearConvergenceSchema}
+        durationInFrames={150}
+        fps={60}
+        width={1920}
+        height={1080}
+        defaultProps={StudyGearConvergenceSchema.parse(studyGearConvergenceConfig)}
       />
 
       {/* Prop Phone Screen UI - Fintech mobile viewport for chroma compositing */}

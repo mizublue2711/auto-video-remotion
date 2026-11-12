@@ -1,0 +1,25 @@
+{
+  "brand": {
+    "name": "CRABIT KOREA",
+    "primaryColor": "#00E5FF",
+    "backgroundColor": "#070D1E"
+  },
+  "title": "K-STUDY GEARS CONVERGENCE",
+  "subtitle": "AUTONOMOUS HARMONIC ORBIT & VORTEX",
+  "backgroundColor": "#070D1E",
+  "springStiffness": 85,
+  "springDamping": 13,
+  "burstStartFrame": 10,
+  "swapStartFrame": 55,
+  "swapDuration": 45,
+  "arcHeight": 60,
+  "arcCurvature": 85,
+  "vortexStartFrame": 120,
+  "vortexDuration": 45,
+  "spiralRevolutions": 1.5,
+  "zeroGAmplitudeX": 8,
+  "zeroGAmplitudeY": 14,
+  "zeroGAmplitudeRotate": 3.5,
+  "showHUD": true,
+  "showCenterVortexGlow": true
+}

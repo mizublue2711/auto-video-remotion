@@ -15,6 +15,12 @@ export * from './ui/KineticTypography';
 // Props & Screen UIs
 export * from './props/PropPhoneScreenUI';
 
+// Motion Lego Wrappers
+export * from './motion';
+
+// K-Study Gear 3D
+export * from './study-gear';
+
 // Micro-FX Mechanics (Class B: Inorganic / Parametric Animation)
 export * from './fx';
 
