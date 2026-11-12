@@ -4,3 +4,6 @@ export * from './SpringBurstWrapper';
 export * from './OrbitalSwapWrapper';
 export * from './VortexSuckWrapper';
 export * from './ZeroGFloatWrapper';
+export * from './KineticTrajectoryLaunch';
+export * from './BottomSheetDrawerReveal';
+export * from './MenuSlotSnapBounce';

@@ -8,10 +8,13 @@
 // 1. Entrance & Exit Springs
 export { SpringBurstWrapper } from './SpringBurstWrapper';
 export { KineticStaggerWrapper } from './KineticStaggerWrapper';
+export { BottomSheetDrawerReveal } from './BottomSheetDrawerReveal';
+export { MenuSlotSnapBounce } from './MenuSlotSnapBounce';
 
 // 2. Trajectory & Positional Choreography
 export { OrbitalSwapWrapper } from './OrbitalSwapWrapper';
 export { VortexSuckWrapper } from './VortexSuckWrapper';
+export { KineticTrajectoryLaunch } from './KineticTrajectoryLaunch';
 
 // 3. Ambient & Spatial Breathing
 export { ZeroGFloatWrapper } from './ZeroGFloatWrapper';
@@ -27,4 +30,7 @@ export const MOTION_CATALOG = {
   ZeroGFloatWrapper: 'Lắc lư dập dềnh không trọng lực tự nhiên bằng sóng Sin/Cos',
   KineticStaggerWrapper: 'Hiệu ứng xuất hiện tầng bậc (Cascade delay) cho thẻ và tiêu đề',
   SpatialCameraDolly: 'Cú máy đẩy tới (Cinematic push-in) và trôi nhẹ (parallax pan)',
+  KineticTrajectoryLaunch: 'Lao vút nhanh dần (Ease-in) với vận tốc quán tính và nén méo theo trục bay',
+  BottomSheetDrawerReveal: 'Giao diện trồi lên từ đáy canvas với độ nảy giảm xóc mượt mà',
+  MenuSlotSnapBounce: 'Hiệu ứng nảy đàn hồi (Pop-in elastic bounce) khi đồ vật tiếp đất khớp vào slot',
 } as const;

@@ -21,6 +21,8 @@ export { GearCompassGeometry } from './study-gear/GearCompassGeometry';
 export { CouponTicketCard } from './ui/CouponTicketCard';
 export { CrabitDebitCard } from './props/CrabitDebitCard';
 export { CrabitAppScreenUI } from './ui/CrabitAppScreenUI';
+export { HalfAppDrawerSheet } from './ui/HalfAppDrawerSheet';
+export { EnergyGlassOrb } from './props/EnergyGlassOrb';
 
 // 3. Vector Icons (Hệ thống icon SVG đồng bộ Brand Tokens)
 export {
@@ -31,6 +33,12 @@ export {
 
 // 4. Spatial Dev Tools
 export { SpatialTunerFrame } from './dev/SpatialTunerFrame';
+
+// 5. Brand Identity & Halo Portals
+export {
+  CrabitBrandPortalLogo,
+  type CrabitBrandPortalLogoProps,
+} from './brand/CrabitBrandPortalLogo';
 
 /**
  * 🏷️ Component Catalog Metadata (Dành cho AI Worker tra cứu mục đích sử dụng)
@@ -52,5 +60,14 @@ export const ASSET_CATALOG = {
     couponCard: { name: 'CouponTicketCard', tag: 'Voucher', desc: 'Vé thưởng xé nẹp đục lỗ chuẩn K-Fintech' },
     debitCard: { name: 'CrabitDebitCard', tag: 'Fintech', desc: 'Thẻ ngân hàng bo góc 28px squircle' },
     appScreen: { name: 'CrabitAppScreenUI', tag: 'Mobile', desc: 'Màn hình app 50,000 Carats dùng chung Scene 2 & 3' },
+    drawerSheet: { name: 'HalfAppDrawerSheet', tag: 'UI/Drawer', desc: 'Ngăn kéo giao diện fintech trượt đáy bo góc 36px' },
+    energyGlassOrb: { name: 'EnergyGlassOrb', tag: 'Prop/Energy', desc: 'Quả cầu năng lượng thạch anh chứa vật thể (Squash & Stretch, Glassmorphic Fresnel)' },
+  },
+  brand: {
+    portalLogo: {
+      name: 'CrabitBrandPortalLogo',
+      tag: 'Brand/FX',
+      desc: 'Điểm hội tụ hào quang & Logo Crabit Carat với vortex và shockwaves',
+    },
   },
 } as const;

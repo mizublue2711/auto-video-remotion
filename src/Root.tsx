@@ -15,6 +15,7 @@ import { InfiniteLoopSchema } from './schemas/infiniteLoopSchema';
 import infiniteLoopConfig from '../site-configs/infinite-loop-v1.json';
 
 import { StudyGearConvergenceScene } from './scenes/StudyGearConvergenceScene';
+import { MasterCompositeScene } from './scenes/MasterCompositeScene';
 import { StudyGearConvergenceSchema } from './schemas/studyGearConvergenceSchema';
 import studyGearConvergenceConfig from '../site-configs/study-gear-convergence.json';
 
@@ -81,16 +82,38 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={InfiniteLoopSchema.parse(infiniteLoopConfig)}
       />
 
-      {/* Scene 2.5: Study Gear Convergence (Burst -> Arc Swap -> Vortex Suction) */}
+      {/* Scene 3: Study Gear Convergence (Burst -> Arc Swap -> Vortex Suction) */}
+      <Composition
+        id="StudyGearConvergence-Scene3"
+        component={StudyGearConvergenceScene as React.FC<any>}
+        schema={StudyGearConvergenceSchema}
+        durationInFrames={180}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={StudyGearConvergenceSchema.parse(studyGearConvergenceConfig)}
+      />
+
+      {/* Backward-compatibility alias for Scene 2.5 */}
       <Composition
         id="StudyGearConvergence-Scene2.5"
         component={StudyGearConvergenceScene as React.FC<any>}
         schema={StudyGearConvergenceSchema}
-        durationInFrames={150}
-        fps={60}
+        durationInFrames={180}
+        fps={30}
         width={1920}
         height={1080}
         defaultProps={StudyGearConvergenceSchema.parse(studyGearConvergenceConfig)}
+      />
+
+      {/* Master Container: Scene 3 Master Composite */}
+      <Composition
+        id="MasterCompositeScene"
+        component={MasterCompositeScene as React.FC<any>}
+        durationInFrames={180}
+        fps={30}
+        width={1920}
+        height={1080}
       />
 
       {/* Prop Phone Screen UI - Fintech mobile viewport for chroma compositing */}

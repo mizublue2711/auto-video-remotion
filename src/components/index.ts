@@ -11,9 +11,14 @@ export * from './ui/DualEngineCard';
 export * from './ui/BentoGrid3D';
 export * from './ui/MarqueeTicker';
 export * from './ui/KineticTypography';
+export * from './ui/HalfAppDrawerSheet';
 
 // Props & Screen UIs
 export * from './props/PropPhoneScreenUI';
+export * from './props/EnergyGlassOrb';
+
+// Brand Identity & Halo Portals
+export * from './brand/CrabitBrandPortalLogo';
 
 // Motion Lego Wrappers
 export * from './motion';
